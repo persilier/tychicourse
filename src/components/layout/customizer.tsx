@@ -10,12 +10,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useLayoutStore } from "@/store/layout-store";
-import { LayoutPanelLeft, Layout, Settings } from "lucide-react";
+import { themes, useThemeStore } from "@/store/theme-store";
+import { Check, LayoutPanelLeft, Layout, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export function Customizer() {
   const { theme, setTheme } = useTheme();
   const { isVerticalLayout, toggleLayout } = useLayoutStore();
+  const { selectedColor, setSelectedColor } = useThemeStore();
 
   return (
     <Sheet>
@@ -84,6 +86,31 @@ export function Customizer() {
               >
                 System
               </Button>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium leading-none">Color</h4>
+            <div className="flex flex-wrap gap-2">
+              {themes.map((theme) => (
+                <Button
+                  key={theme.name}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSelectedColor(theme.name)}
+                  className="flex items-center gap-2 pr-2"
+                >
+                  <div
+                    className="h-4 w-4 rounded-full"
+                    style={{
+                      backgroundColor: `hsl(${theme.activeColor})`,
+                    }}
+                  />
+                  {theme.label}
+                  {selectedColor === theme.name && (
+                    <Check className="ml-auto h-4 w-4 shrink-0" />
+                  )}
+                </Button>
+              ))}
             </div>
           </div>
         </div>
