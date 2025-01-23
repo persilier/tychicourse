@@ -12,9 +12,10 @@ import {
 import { useLayoutStore } from "@/store/layout-store";
 import { themes, useThemeStore } from "@/store/theme-store";
 import { motion } from "framer-motion";
-import { Check, LayoutPanelLeft, Layout, Settings } from "lucide-react";
+import { Check, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Icon } from "@iconify/react";
+import { cn } from "@/lib/utils";
 
 export function Customizer() {
   const { theme, setTheme } = useTheme();
@@ -31,69 +32,147 @@ export function Customizer() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Button
-            variant="outline"
-            size="icon"
-            className="fixed bottom-4 right-4 h-10 w-10 rounded-full"
-          >
-            <motion.div
-              animate={{ rotate: 180 }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        <div className="fixed bottom-4 right-4">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 rounded-full"
             >
-              <Settings className="h-5 w-5" />
-            </motion.div>
-            <span className="sr-only">Open Customizer</span>
-          </Button>
-        </motion.div>
+              <motion.div
+                animate={{ rotate: 180 }}
+                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+              >
+                <Settings className="h-5 w-5" />
+              </motion.div>
+              <span className="sr-only">Open Customizer</span>
+            </Button>
+          </motion.div>
+        </div>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
+        <SheetHeader className="mb-6">
           <SheetTitle>Customize</SheetTitle>
           <SheetDescription>
             Make changes to your dashboard appearance here.
           </SheetDescription>
         </SheetHeader>
         <motion.div
-          className="grid gap-4 py-4"
+          className="grid gap-8 py-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h4 className="text-sm font-medium leading-none">Layout</h4>
-            <div className="flex flex-wrap gap-2">
-              <motion.div
+            <div className="grid grid-cols-2 gap-2">
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={toggleLayout}
+                className={cn(
+                  "relative aspect-[1.5] overflow-hidden rounded-lg border-2 bg-popover p-1",
+                  isVerticalLayout && "border-primary"
+                )}
               >
-                <Button
-                  variant={isVerticalLayout ? "default" : "outline"}
-                  size="sm"
-                  onClick={toggleLayout}
-                  className="flex items-center gap-2"
-                >
-                  <LayoutPanelLeft className="h-4 w-4" />
+                <div className="absolute bottom-2 left-2 text-xs font-medium">
                   Vertical
-                </Button>
-              </motion.div>
-              <motion.div
+                </div>
+                <div className="flex h-full">
+                  <div className="h-full w-[30%] rounded bg-muted" />
+                  <div className="flex-1 flex flex-col gap-1 p-1">
+                    <div className="h-2 w-[80%] rounded-sm bg-muted" />
+                    <div className="h-2 w-[60%] rounded-sm bg-muted" />
+                  </div>
+                </div>
+                {isVerticalLayout && (
+                  <div className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Check className="h-3 w-3" />
+                  </div>
+                )}
+              </motion.button>
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={toggleLayout}
+                className={cn(
+                  "relative aspect-[1.5] overflow-hidden rounded-lg border-2 bg-popover p-1",
+                  !isVerticalLayout && "border-primary"
+                )}
               >
-                <Button
-                  variant={!isVerticalLayout ? "default" : "outline"}
-                  size="sm"
-                  onClick={toggleLayout}
-                  className="flex items-center gap-2"
-                >
-                  <Layout className="h-4 w-4" />
+                <div className="absolute bottom-2 left-2 text-xs font-medium">
                   Horizontal
-                </Button>
-              </motion.div>
+                </div>
+                <div className="flex h-full flex-col">
+                  <div className="h-[30%] w-full rounded bg-muted" />
+                  <div className="flex-1 p-1">
+                    <div className="h-2 w-[80%] rounded-sm bg-muted" />
+                  </div>
+                </div>
+                {!isVerticalLayout && (
+                  <div className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Check className="h-3 w-3" />
+                  </div>
+                )}
+              </motion.button>
             </div>
           </div>
-          <div className="space-y-2">
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-medium leading-none">Sidebar Style</h4>
+            <div className="grid grid-cols-2 gap-2">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSidebarVariant("default")}
+                className={cn(
+                  "relative aspect-[1.5] overflow-hidden rounded-lg border-2 bg-popover p-1",
+                  sidebarVariant === "default" && "border-primary"
+                )}
+              >
+                <div className="absolute bottom-2 left-2 text-xs font-medium">
+                  Default
+                </div>
+                <div className="flex h-full">
+                  <div className="h-full w-[30%] rounded bg-muted" />
+                  <div className="flex-1 p-1">
+                    <div className="h-2 w-[80%] rounded-sm bg-muted" />
+                  </div>
+                </div>
+                {sidebarVariant === "default" && (
+                  <div className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Check className="h-3 w-3" />
+                  </div>
+                )}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSidebarVariant("floating")}
+                className={cn(
+                  "relative aspect-[1.5] overflow-hidden rounded-lg border-2 bg-popover p-1",
+                  sidebarVariant === "floating" && "border-primary"
+                )}
+              >
+                <div className="absolute bottom-2 left-2 text-xs font-medium">
+                  Floating
+                </div>
+                <div className="flex h-full">
+                  <div className="h-full w-[30%] translate-x-1 rounded-lg bg-muted/80 shadow-lg backdrop-blur" />
+                  <div className="flex-1 p-1">
+                    <div className="h-2 w-[80%] rounded-sm bg-muted" />
+                  </div>
+                </div>
+                {sidebarVariant === "floating" && (
+                  <div className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <Check className="h-3 w-3" />
+                  </div>
+                )}
+              </motion.button>
+            </div>
+          </div>
+
+          <div className="space-y-4">
             <h4 className="text-sm font-medium leading-none">Theme</h4>
             <div className="grid grid-cols-3 gap-2">
               <Button
@@ -125,68 +204,68 @@ export function Customizer() {
               </Button>
             </div>
           </div>
-          <div className="space-y-2">
+
+          <div className="space-y-4">
             <h4 className="text-sm font-medium leading-none">Radius</h4>
-            <div className="grid grid-cols-5 gap-2">
-              <Button
-                variant={radius === "none" ? "default" : "outline"}
-                onClick={() => setRadius("none")}
-                className="h-8 w-8 p-0"
-              >
-                <div className="h-4 w-4 rounded-none border-2" />
-              </Button>
-              <Button
-                variant={radius === "sm" ? "default" : "outline"}
-                onClick={() => setRadius("sm")}
-                className="h-8 w-8 p-0"
-              >
-                <div className="h-4 w-4 rounded-sm border-2" />
-              </Button>
-              <Button
-                variant={radius === "md" ? "default" : "outline"}
-                onClick={() => setRadius("md")}
-                className="h-8 w-8 p-0"
-              >
-                <div className="h-4 w-4 rounded-md border-2" />
-              </Button>
-              <Button
-                variant={radius === "lg" ? "default" : "outline"}
-                onClick={() => setRadius("lg")}
-                className="h-8 w-8 p-0"
-              >
-                <div className="h-4 w-4 rounded-lg border-2" />
-              </Button>
-              <Button
-                variant={radius === "full" ? "default" : "outline"}
-                onClick={() => setRadius("full")}
-                className="h-8 w-8 p-0"
-              >
-                <div className="h-4 w-4 rounded-full border-2" />
-              </Button>
+            <div className="grid grid-cols-5 gap-4">
+              <div className="flex flex-col items-center gap-1.5">
+                <Button
+                  variant={radius === "none" ? "default" : "outline"}
+                  onClick={() => setRadius("none")}
+                  className="h-8 w-8 p-0"
+                >
+                  <div className="h-4 w-4 rounded-none border-2" />
+                </Button>
+                <span className="text-xs text-muted-foreground">Square</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1.5">
+                <Button
+                  variant={radius === "sm" ? "default" : "outline"}
+                  onClick={() => setRadius("sm")}
+                  className="h-8 w-8 p-0"
+                >
+                  <div className="h-4 w-4 rounded-sm border-2" />
+                </Button>
+                <span className="text-xs text-muted-foreground">Small</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1.5">
+                <Button
+                  variant={radius === "md" ? "default" : "outline"}
+                  onClick={() => setRadius("md")}
+                  className="h-8 w-8 p-0"
+                >
+                  <div className="h-4 w-4 rounded-md border-2" />
+                </Button>
+                <span className="text-xs text-muted-foreground">Medium</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1.5">
+                <Button
+                  variant={radius === "lg" ? "default" : "outline"}
+                  onClick={() => setRadius("lg")}
+                  className="h-8 w-8 p-0"
+                >
+                  <div className="h-4 w-4 rounded-lg border-2" />
+                </Button>
+                <span className="text-xs text-muted-foreground">Large</span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1.5">
+                <Button
+                  variant={radius === "full" ? "default" : "outline"}
+                  onClick={() => setRadius("full")}
+                  className="h-8 w-8 p-0"
+                >
+                  <div className="h-4 w-4 rounded-full border-2" />
+                </Button>
+                <span className="text-xs text-muted-foreground">Full</span>
+              </div>
             </div>
           </div>
-          <div className="space-y-2">
-            <h4 className="text-sm font-medium leading-none">Sidebar</h4>
-            <div className="grid grid-cols-2 gap-2">
-              <Button
-                variant={sidebarVariant === "default" ? "default" : "outline"}
-                onClick={() => setSidebarVariant("default")}
-                className="justify-start"
-              >
-                <Icon icon="heroicons:squares-2x2" className="mr-2 h-4 w-4" />
-                Default
-              </Button>
-              <Button
-                variant={sidebarVariant === "floating" ? "default" : "outline"}
-                onClick={() => setSidebarVariant("floating")}
-                className="justify-start"
-              >
-                <Icon icon="heroicons:window" className="mr-2 h-4 w-4" />
-                Floating
-              </Button>
-            </div>
-          </div>
-          <div className="space-y-2">
+
+          <div className="space-y-4">
             <h4 className="text-sm font-medium leading-none">Color</h4>
             <div className="flex flex-wrap gap-2">
               {themes.map((theme, index) => (
