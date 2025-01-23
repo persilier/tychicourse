@@ -14,19 +14,18 @@ import { themes, useThemeStore } from "@/store/theme-store";
 import { motion } from "framer-motion";
 import { Check, LayoutPanelLeft, Layout, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
-
-const radiusOptions = [
-  { value: "none", label: "Square" },
-  { value: "sm", label: "Small" },
-  { value: "md", label: "Medium" },
-  { value: "lg", label: "Large" },
-  { value: "full", label: "Full" },
-] as const;
+import { Icon } from "@iconify/react";
 
 export function Customizer() {
   const { theme, setTheme } = useTheme();
-  const { isVerticalLayout, toggleLayout, radius, setRadius } =
-    useLayoutStore();
+  const {
+    isVerticalLayout,
+    toggleLayout,
+    radius,
+    setRadius,
+    sidebarVariant,
+    setSidebarVariant,
+  } = useLayoutStore();
   const { selectedColor, setSelectedColor } = useThemeStore();
 
   return (
@@ -96,71 +95,95 @@ export function Customizer() {
           </div>
           <div className="space-y-2">
             <h4 className="text-sm font-medium leading-none">Theme</h4>
-            <div className="flex flex-wrap gap-2">
-              {["light", "dark", "system"].map((t) => (
-                <motion.div
-                  key={t}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button
-                    variant={theme === t ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setTheme(t)}
-                  >
-                    {t.charAt(0).toUpperCase() + t.slice(1)}
-                  </Button>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-3 gap-2">
+              <Button
+                variant={theme === "light" ? "default" : "outline"}
+                onClick={() => setTheme("light")}
+                className="justify-start"
+              >
+                <Icon icon="heroicons:sun" className="mr-2 h-4 w-4" />
+                Light
+              </Button>
+              <Button
+                variant={theme === "dark" ? "default" : "outline"}
+                onClick={() => setTheme("dark")}
+                className="justify-start"
+              >
+                <Icon icon="heroicons:moon" className="mr-2 h-4 w-4" />
+                Dark
+              </Button>
+              <Button
+                variant={theme === "system" ? "default" : "outline"}
+                onClick={() => setTheme("system")}
+                className="justify-start"
+              >
+                <Icon
+                  icon="heroicons:computer-desktop"
+                  className="mr-2 h-4 w-4"
+                />
+                System
+              </Button>
             </div>
           </div>
           <div className="space-y-2">
             <h4 className="text-sm font-medium leading-none">Radius</h4>
-            <div className="flex flex-wrap gap-2">
-              {radiusOptions.map((option) => (
-                <motion.div
-                  key={option.value}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button
-                    variant={radius === option.value ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setRadius(option.value)}
-                    className="flex items-center gap-2"
-                  >
-                    <div className="relative flex h-4 w-4 items-center justify-center">
-                      <div
-                        className={`absolute inset-0 border-2 border-primary bg-primary/20 ${
-                          option.value === "none"
-                            ? ""
-                            : option.value === "sm"
-                              ? "rounded"
-                              : option.value === "md"
-                                ? "rounded-md"
-                                : option.value === "lg"
-                                  ? "rounded-lg"
-                                  : "rounded-full"
-                        }`}
-                      />
-                    </div>
-                    {option.label}
-                    {radius === option.value && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 300,
-                          damping: 20,
-                        }}
-                      >
-                        <Check className="ml-auto h-4 w-4 shrink-0" />
-                      </motion.div>
-                    )}
-                  </Button>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-5 gap-2">
+              <Button
+                variant={radius === "none" ? "default" : "outline"}
+                onClick={() => setRadius("none")}
+                className="h-8 w-8 p-0"
+              >
+                <div className="h-4 w-4 rounded-none border-2" />
+              </Button>
+              <Button
+                variant={radius === "sm" ? "default" : "outline"}
+                onClick={() => setRadius("sm")}
+                className="h-8 w-8 p-0"
+              >
+                <div className="h-4 w-4 rounded-sm border-2" />
+              </Button>
+              <Button
+                variant={radius === "md" ? "default" : "outline"}
+                onClick={() => setRadius("md")}
+                className="h-8 w-8 p-0"
+              >
+                <div className="h-4 w-4 rounded-md border-2" />
+              </Button>
+              <Button
+                variant={radius === "lg" ? "default" : "outline"}
+                onClick={() => setRadius("lg")}
+                className="h-8 w-8 p-0"
+              >
+                <div className="h-4 w-4 rounded-lg border-2" />
+              </Button>
+              <Button
+                variant={radius === "full" ? "default" : "outline"}
+                onClick={() => setRadius("full")}
+                className="h-8 w-8 p-0"
+              >
+                <div className="h-4 w-4 rounded-full border-2" />
+              </Button>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium leading-none">Sidebar</h4>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant={sidebarVariant === "default" ? "default" : "outline"}
+                onClick={() => setSidebarVariant("default")}
+                className="justify-start"
+              >
+                <Icon icon="heroicons:squares-2x2" className="mr-2 h-4 w-4" />
+                Default
+              </Button>
+              <Button
+                variant={sidebarVariant === "floating" ? "default" : "outline"}
+                onClick={() => setSidebarVariant("floating")}
+                className="justify-start"
+              >
+                <Icon icon="heroicons:window" className="mr-2 h-4 w-4" />
+                Floating
+              </Button>
             </div>
           </div>
           <div className="space-y-2">

@@ -4,12 +4,12 @@ import { useLayoutStore } from "@/store/layout-store";
 import { useEffect } from "react";
 
 export function LayoutInit() {
-  const { isVerticalLayout } = useLayoutStore();
+  const { radius, setRadius } = useLayoutStore();
 
   useEffect(() => {
-    // This triggers the store to rehydrate from localStorage
-    useLayoutStore.persist.rehydrate();
-  }, []);
+    // Apply the radius on mount
+    setRadius(radius);
+  }, [radius, setRadius]);
 
   return null;
 }

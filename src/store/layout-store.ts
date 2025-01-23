@@ -3,11 +3,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+type SidebarVariant = "default" | "floating";
+
 interface LayoutState {
   isVerticalLayout: boolean;
   toggleLayout: () => void;
   radius: "none" | "sm" | "md" | "lg" | "full";
   setRadius: (radius: "none" | "sm" | "md" | "lg" | "full") => void;
+  sidebarCollapsed: boolean;
+  sidebarVariant: SidebarVariant;
+  setSidebarCollapsed: (collapsed: boolean) => void;
+  setSidebarVariant: (variant: SidebarVariant) => void;
 }
 
 const getRadiusValue = (radius: "none" | "sm" | "md" | "lg" | "full") => {
@@ -39,6 +45,10 @@ export const useLayoutStore = create<LayoutState>()(
         );
         set({ radius });
       },
+      sidebarCollapsed: false,
+      sidebarVariant: "default",
+      setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
+      setSidebarVariant: (variant) => set({ sidebarVariant: variant }),
     }),
     {
       name: "layout-storage",
