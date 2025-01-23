@@ -16,9 +16,76 @@ type ThemeColor = {
 interface ThemeState {
   selectedColor: string;
   setSelectedColor: (color: string) => void;
+  radius: string;
+  setRadius: (radius: string) => void;
+  sidebarColor: string;
+  setSidebarColor: (color: string) => void;
 }
 
-export const themes: ThemeColor[] = [
+const sidebarColors = [
+  {
+    name: "default",
+    label: "Default",
+    background: "bg-card/50 backdrop-blur-sm",
+    border: "border-r",
+    color: "text-card-foreground",
+    active: "bg-primary/10 text-primary",
+    hover: "hover:bg-accent/50 hover:text-foreground",
+    muted: "text-muted-foreground",
+  },
+  {
+    name: "solid",
+    label: "Solid",
+    background: "bg-card",
+    border: "border-r",
+    color: "text-card-foreground",
+    active: "bg-primary/10 text-primary",
+    hover: "hover:bg-accent/50 hover:text-foreground",
+    muted: "text-muted-foreground",
+  },
+  {
+    name: "primary",
+    label: "Primary",
+    background: "bg-primary/5 backdrop-blur-sm",
+    border: "border-r border-primary/10",
+    color: "text-foreground",
+    active: "bg-primary/15 text-primary font-medium",
+    hover: "hover:bg-primary/10 hover:text-primary",
+    muted: "text-muted-foreground",
+  },
+  {
+    name: "dark",
+    label: "Dark",
+    background: "bg-zinc-950/90 backdrop-blur-sm",
+    border: "border-r border-zinc-800",
+    color: "text-zinc-100",
+    active: "bg-white/10 text-white font-medium",
+    hover: "hover:bg-white/5 hover:text-white",
+    muted: "text-zinc-400",
+  },
+  {
+    name: "light",
+    label: "Light",
+    background: "bg-white/50 backdrop-blur-sm",
+    border: "border-r",
+    color: "text-gray-900",
+    active: "bg-black/10 text-black font-medium",
+    hover: "hover:bg-black/5 hover:text-black",
+    muted: "text-gray-600",
+  },
+  {
+    name: "accent",
+    label: "Accent",
+    background: "bg-accent backdrop-blur-sm",
+    border: "border-r border-accent",
+    color: "text-accent-foreground",
+    active: "bg-accent-foreground/10 text-accent-foreground font-medium",
+    hover: "hover:bg-accent-foreground/5 hover:text-accent-foreground",
+    muted: "text-accent-foreground/60",
+  },
+];
+
+const themes: ThemeColor[] = [
   {
     name: "zinc",
     label: "Zinc",
@@ -431,9 +498,19 @@ export const useThemeStore = create<ThemeState>()(
           set({ selectedColor: color });
         }
       },
+      radius: "rounded-lg",
+      setRadius: (radius: string) => {
+        set({ radius });
+      },
+      sidebarColor: "default",
+      setSidebarColor: (color: string) => {
+        set({ sidebarColor: color });
+      },
     }),
     {
-      name: "theme-color-storage",
+      name: "theme-store",
     }
   )
 );
+
+export { themes, sidebarColors };

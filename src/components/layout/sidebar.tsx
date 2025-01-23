@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import React from "react";
 import { Icon } from "@iconify/react";
+import { useThemeStore, sidebarColors } from "@/store/theme-store";
 
 interface SubMenuItem {
   title: string;
@@ -76,7 +77,12 @@ export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
   const { isVerticalLayout, sidebarCollapsed, setSidebarCollapsed } =
     useLayoutStore();
+  const { sidebarColor } = useThemeStore();
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
+
+  const selectedSidebarColor =
+    sidebarColors.find((color) => color.name === sidebarColor) ||
+    sidebarColors[0];
 
   const toggleSubmenu = (title: string) => {
     if (sidebarCollapsed) {
@@ -102,7 +108,10 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <div
       className={cn(
-        "relative h-full bg-card/50 backdrop-blur-sm text-card-foreground border-r",
+        "relative h-full",
+        selectedSidebarColor.background,
+        selectedSidebarColor.border,
+        selectedSidebarColor.color,
         isVerticalLayout
           ? cn(
               "transition-all duration-300 ease-in-out",
@@ -183,8 +192,11 @@ export function Sidebar({ className }: SidebarProps) {
                           className={cn(
                             "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
                             isActive
-                              ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-medium"
-                              : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                              ? selectedSidebarColor.active
+                              : cn(
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
                           )}
                         >
                           <Icon
@@ -192,7 +204,7 @@ export function Sidebar({ className }: SidebarProps) {
                             className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
                           />
                           {isActive && (
-                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-primary" />
+                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                           )}
                         </button>
                       ) : (
@@ -201,8 +213,11 @@ export function Sidebar({ className }: SidebarProps) {
                           className={cn(
                             "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
                             isActive
-                              ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-medium"
-                              : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                              ? selectedSidebarColor.active
+                              : cn(
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
                           )}
                         >
                           <Icon
@@ -210,7 +225,7 @@ export function Sidebar({ className }: SidebarProps) {
                             className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
                           />
                           {isActive && (
-                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-primary" />
+                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                           )}
                         </Link>
                       )}
@@ -232,8 +247,11 @@ export function Sidebar({ className }: SidebarProps) {
                     className={cn(
                       "group relative flex w-full items-center justify-between gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
                       isActive
-                        ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-medium"
-                        : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                        ? selectedSidebarColor.active
+                        : cn(
+                            selectedSidebarColor.muted,
+                            selectedSidebarColor.hover
+                          )
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -250,7 +268,7 @@ export function Sidebar({ className }: SidebarProps) {
                       )}
                     />
                     {isActive && (
-                      <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-primary" />
+                      <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                     )}
                   </button>
                   {openSubmenu === item.title && (
@@ -264,8 +282,11 @@ export function Sidebar({ className }: SidebarProps) {
                             className={cn(
                               "group relative flex w-full items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
                               isSubActive
-                                ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-medium"
-                                : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                                ? selectedSidebarColor.active
+                                : cn(
+                                    selectedSidebarColor.muted,
+                                    selectedSidebarColor.hover
+                                  )
                             )}
                           >
                             <div className="flex items-center gap-2">
@@ -273,14 +294,17 @@ export function Sidebar({ className }: SidebarProps) {
                                 className={cn(
                                   "h-1.5 w-1.5 rounded-full transition-colors duration-200",
                                   isSubActive
-                                    ? "bg-primary"
-                                    : "bg-muted-foreground/40 group-hover:bg-foreground/40"
+                                    ? selectedSidebarColor.active
+                                    : cn(
+                                        selectedSidebarColor.muted,
+                                        selectedSidebarColor.hover
+                                      )
                                 )}
                               />
                               <span>{subItem.title}</span>
                             </div>
                             {isSubActive && (
-                              <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-primary" />
+                              <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                             )}
                           </Link>
                         );
@@ -298,8 +322,8 @@ export function Sidebar({ className }: SidebarProps) {
                 className={cn(
                   "group relative flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
                   isActive
-                    ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-medium"
-                    : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                    ? selectedSidebarColor.active
+                    : cn(selectedSidebarColor.muted, selectedSidebarColor.hover)
                 )}
               >
                 <Icon
@@ -308,7 +332,7 @@ export function Sidebar({ className }: SidebarProps) {
                 />
                 <span>{item.title}</span>
                 {isActive && (
-                  <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-primary" />
+                  <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                 )}
               </Link>
             );

@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useLayoutStore } from "@/store/layout-store";
-import { themes, useThemeStore } from "@/store/theme-store";
+import { themes, useThemeStore, sidebarColors } from "@/store/theme-store";
 import { motion } from "framer-motion";
 import { Check, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -27,7 +27,8 @@ export function Customizer() {
     sidebarVariant,
     setSidebarVariant,
   } = useLayoutStore();
-  const { selectedColor, setSelectedColor } = useThemeStore();
+  const { selectedColor, setSelectedColor, sidebarColor, setSidebarColor } =
+    useThemeStore();
 
   return (
     <Sheet>
@@ -50,19 +51,14 @@ export function Customizer() {
           </motion.div>
         </div>
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader className="mb-6">
+      <SheetContent className="w-[600px] border-l">
+        <SheetHeader className="mb-4">
           <SheetTitle>Customize</SheetTitle>
           <SheetDescription>
-            Make changes to your dashboard appearance here.
+            Make the dashboard yours by customizing the layout and style.
           </SheetDescription>
         </SheetHeader>
-        <motion.div
-          className="grid gap-8 py-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
+        <div className="flex flex-col gap-8">
           <div className="space-y-4">
             <h4 className="text-sm font-medium leading-none">Layout</h4>
             <div className="grid grid-cols-2 gap-2">
@@ -309,7 +305,52 @@ export function Customizer() {
               ))}
             </div>
           </div>
-        </motion.div>
+
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-medium">Sidebar Color</h3>
+            </div>
+            <div className="grid grid-cols-6 gap-2">
+              {sidebarColors.map((color) => (
+                <motion.button
+                  key={color.name}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setSidebarColor(color.name)}
+                  className={cn(
+                    "group relative flex flex-col items-center rounded-lg border-2 p-2 hover:border-primary",
+                    sidebarColor === color.name
+                      ? "border-primary"
+                      : "border-transparent"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "mb-1.5 h-8 w-full rounded-md",
+                      color.background,
+                      color.border
+                    )}
+                  />
+                  <span className="text-[10px] font-medium">{color.label}</span>
+                  {sidebarColor === color.name && (
+                    <motion.div
+                      layoutId="activeColor"
+                      className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Icon
+                        icon="solar:check-circle-bold-duotone"
+                        className="h-3 w-3"
+                      />
+                    </motion.div>
+                  )}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
