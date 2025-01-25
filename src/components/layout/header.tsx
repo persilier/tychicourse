@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -33,6 +33,8 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { LanguageSwitcher } from "../language-switcher";
+import { useTranslations, useLocale } from "next-intl";
 
 interface UserNavProps {
   user?: {
@@ -49,7 +51,7 @@ function UserNav({
     image: "https://github.com/shadcn.png",
   },
 }: UserNavProps) {
-  const router = useRouter();
+  //const router = useRouter();
   const { theme } = useTheme();
 
   return (
@@ -99,22 +101,10 @@ function UserNav({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[280px] p-2" sideOffset={8}>
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 20 }}
-          transition={{
-            type: "spring",
-            stiffness: 350,
-            damping: 25,
-          }}
-        >
+        <div>
           <DropdownMenuLabel className="font-normal">
             <div className="flex items-start gap-3 pb-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
+              <div>
                 <Avatar className="h-12 w-12 border-2 border-border transition-all duration-300 hover:border-primary">
                   <AvatarImage src={user.image} alt={user.name} />
                   <AvatarFallback>
@@ -124,9 +114,9 @@ function UserNav({
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-              </motion.div>
+              </div>
               <div className="flex flex-col space-y-1">
-                <motion.div layout>
+                <div>
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium leading-none">
                       {user.name}
@@ -137,70 +127,42 @@ function UserNav({
                   </div>
                   <p className="text-xs text-muted-foreground">{user.email}</p>
                   <div className="flex items-center gap-2">
-                    <motion.div
-                      className="h-2 w-2 rounded-full bg-green-500"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
+                    <div className="h-2 w-2 rounded-full bg-green-500" />
                     <span className="text-xs text-muted-foreground">
                       Online
                     </span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator className="-mx-2 my-2" />
-          <motion.div layout>
+          <div>
             {[
               { icon: "heroicons:users", label: "Public Profile" },
               { icon: "heroicons:user", label: "My Profile" },
               { icon: "heroicons:cog-6-tooth", label: "My Account" },
               { icon: "heroicons:code-bracket-square", label: "Dev Forum" },
-            ].map((item, index) => (
-              <motion.div
+            ].map((item) => (
+              <DropdownMenuItem
                 key={item.label}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{
-                  delay: index * 0.05,
-                  type: "spring",
-                  stiffness: 350,
-                  damping: 25,
-                }}
+                className="group relative cursor-pointer"
               >
-                <DropdownMenuItem className="group relative cursor-pointer">
-                  <div className="absolute right-0 h-full w-1 origin-right scale-y-0 bg-primary transition-transform group-hover:scale-y-100" />
-                  <motion.div
-                    className="flex items-center gap-2 pr-2"
-                    whileHover={{ x: -4 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  >
-                    <Icon
-                      icon={item.icon}
-                      className="h-4 w-4 transition-transform group-hover:scale-110"
-                    />
-                    <span>{item.label}</span>
-                  </motion.div>
-                </DropdownMenuItem>
-              </motion.div>
+                <div className="absolute right-0 h-full w-1 origin-right scale-y-0 bg-primary transition-transform group-hover:scale-y-100" />
+                <div className="flex items-center gap-2 pr-2">
+                  <Icon
+                    icon={item.icon}
+                    className="h-4 w-4 transition-transform group-hover:scale-110"
+                  />
+                  <span>{item.label}</span>
+                </div>
+              </DropdownMenuItem>
             ))}
-          </motion.div>
+          </div>
           <DropdownMenuSeparator className="-mx-2 my-2" />
-          <motion.div layout>
+          <div>
             <DropdownMenuItem className="group relative cursor-pointer">
-              <motion.div
-                className="flex items-center gap-2"
-                whileHover={{ x: -4 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
+              <div className="flex items-center gap-2">
                 <Icon
                   icon="heroicons:globe-alt"
                   className="mr-2 h-4 w-4 transition-transform group-hover:scale-110"
@@ -213,14 +175,10 @@ function UserNav({
                     className="h-4 w-4 transition-transform group-hover:scale-110"
                   />
                 </div>
-              </motion.div>
+              </div>
             </DropdownMenuItem>
             <DropdownMenuItem className="group relative cursor-pointer">
-              <motion.div
-                className="flex items-center gap-2"
-                whileHover={{ x: -4 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              >
+              <div className="flex items-center gap-2">
                 <Icon
                   icon={theme === "light" ? "heroicons:moon" : "heroicons:sun"}
                   className="mr-2 h-4 w-4 transition-transform group-hover:scale-110"
@@ -230,45 +188,30 @@ function UserNav({
                   className="ml-auto flex h-4 w-8 items-center rounded-full bg-muted p-1 transition-colors group-hover:bg-muted/80"
                   role="switch"
                 >
-                  <motion.div
+                  <div
                     className={cn(
                       "h-3 w-3 rounded-full bg-foreground",
                       theme === "dark" && "translate-x-[100%]"
                     )}
-                    layout
-                    transition={{ type: "spring", stiffness: 200, damping: 10 }}
                   />
                 </div>
-              </motion.div>
+              </div>
             </DropdownMenuItem>
-          </motion.div>
+          </div>
           <DropdownMenuSeparator className="-mx-2 my-2" />
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: 0.2,
-              type: "spring",
-              stiffness: 350,
-              damping: 25,
-            }}
-          >
+          <div>
             <DropdownMenuItem className="group relative cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600 dark:focus:bg-red-950">
               <div className="absolute right-0 h-full w-1 origin-right scale-y-0 bg-red-600 transition-transform group-hover:scale-y-100" />
-              <motion.div
-                whileHover={{ x: -4 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="flex items-center gap-2 pr-2"
-              >
+              <div className="flex items-center gap-2 pr-2">
                 <Icon
                   icon="heroicons:power"
                   className="h-4 w-4 transition-transform group-hover:scale-110"
                 />
                 Logout
-              </motion.div>
+              </div>
             </DropdownMenuItem>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -352,7 +295,7 @@ function NotificationDropdown() {
             animate={unreadCount > 0 ? { scale: [1, 1.2, 1] } : {}}
             transition={{ duration: 0.2 }}
           >
-            <Icon icon="heroicons:bell" className="h-5 w-5" />
+            <Icon icon="solar:bell-bold-duotone" className="h-5 w-5" />
           </motion.div>
           {unreadCount > 0 && (
             <motion.div
@@ -623,6 +566,9 @@ export function Header() {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
+  const t = useTranslations();
+  const locale = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -640,6 +586,10 @@ export function Header() {
     command();
   };
 
+  const navigateWithLocale = (path: string) => {
+    router.push(`/${locale}/${path}`);
+  };
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -651,10 +601,12 @@ export function Header() {
               onClick={() => setOpen(true)}
             >
               <Icon
-                icon="heroicons:magnifying-glass"
+                icon="solar:magnifying-glass-bold-duotone"
                 className="mr-2 h-4 w-4 shrink-0"
               />
-              <span className="hidden md:inline-flex">Search anything...</span>
+              <span className="hidden md:inline-flex">
+                {t("Common.search")}
+              </span>
               <kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 md:flex">
                 <span className="text-xs">⌘</span>K
               </kbd>
@@ -663,7 +615,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <NotificationDropdown />
-
+              <LanguageSwitcher />
               <Button
                 variant="ghost"
                 size="icon"
@@ -671,7 +623,7 @@ export function Header() {
                 aria-label="Messages"
               >
                 <Icon
-                  icon="heroicons:chat-bubble-left-right"
+                  icon="solar:chat-square-like-bold-duotone"
                   className="h-5 w-5"
                 />
                 <Badge
@@ -690,7 +642,11 @@ export function Header() {
                 aria-label="Toggle theme"
               >
                 <Icon
-                  icon={theme === "light" ? "heroicons:moon" : "heroicons:sun"}
+                  icon={
+                    theme === "light"
+                      ? "solar:moon-bold-duotone"
+                      : "solar:sun-bold-duotone"
+                  }
                   className="h-5 w-5"
                 />
               </Button>
@@ -702,43 +658,45 @@ export function Header() {
       </header>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={t("Common.search")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Navigation">
+          <CommandEmpty>{t("Common.noResults")}</CommandEmpty>
+          <CommandGroup heading={t("Navigation.title")}>
             <CommandItem
-              onSelect={() => runCommand(() => router.push("/dashboard"))}
+              onSelect={() => runCommand(() => navigateWithLocale("dashboard"))}
             >
               <Icon icon="heroicons:home" className="mr-2 h-4 w-4" />
-              <span>Dashboard</span>
+              <span>{t("Navigation.dashboard")}</span>
               <CommandShortcut>⌘H</CommandShortcut>
             </CommandItem>
             <CommandItem
               onSelect={() =>
-                runCommand(() => router.push("/dashboard/analytics"))
+                runCommand(() => navigateWithLocale("dashboard/analytics"))
               }
             >
               <Icon icon="heroicons:chart-bar" className="mr-2 h-4 w-4" />
-              <span>Analytics</span>
+              <span>{t("Navigation.analytics")}</span>
               <CommandShortcut>⌘A</CommandShortcut>
             </CommandItem>
             <CommandItem
-              onSelect={() => runCommand(() => router.push("/dashboard/users"))}
+              onSelect={() =>
+                runCommand(() => navigateWithLocale("dashboard/users"))
+              }
             >
               <Icon icon="heroicons:users" className="mr-2 h-4 w-4" />
-              <span>Users</span>
+              <span>{t("Navigation.users")}</span>
               <CommandShortcut>⌘U</CommandShortcut>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Settings">
+          <CommandGroup heading={t("Navigation.settings")}>
             <CommandItem
               onSelect={() =>
-                runCommand(() => router.push("/dashboard/settings"))
+                runCommand(() => navigateWithLocale("dashboard/settings"))
               }
             >
               <Icon icon="heroicons:cog-6-tooth" className="mr-2 h-4 w-4" />
-              <span>Settings</span>
+              <span>{t("Navigation.settings")}</span>
               <CommandShortcut>⌘S</CommandShortcut>
             </CommandItem>
             <CommandItem
@@ -750,7 +708,7 @@ export function Header() {
                 icon={theme === "light" ? "heroicons:moon" : "heroicons:sun"}
                 className="mr-2 h-4 w-4"
               />
-              <span>Toggle Theme</span>
+              <span>{t("Common.toggleTheme")}</span>
               <CommandShortcut>⌘T</CommandShortcut>
             </CommandItem>
           </CommandGroup>

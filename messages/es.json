@@ -1,0 +1,25 @@
+{
+  "Index": {
+    "title": "Bienvenido a TychiCourse",
+    "description": "Tu plataforma de aprendizaje"
+  },
+  "Navigation": {
+    "title": "Navegación",
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "courses": "Cursos",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "analytics": "Analíticas",
+    "users": "Usuarios"
+  },
+  "Common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "search": "Buscar...",
+    "toggleTheme": "Cambiar tema",
+    "noResults": "No se encontraron resultados"
+  }
+}

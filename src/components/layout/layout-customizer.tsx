@@ -36,9 +36,9 @@ export function Customizer() {
         <div className="fixed bottom-4 right-4">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
-              variant="outline"
+              variant="default"
               size="icon"
-              className="h-10 w-10 rounded-full"
+              className="h-12 w-12 rounded-full"
             >
               <motion.div
                 animate={{ rotate: 180 }}

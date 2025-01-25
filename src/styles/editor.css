@@ -1,0 +1,186 @@
+.ql-container {
+  @apply !font-sans text-base;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.ql-toolbar {
+  @apply !border-border !bg-muted;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.ql-toolbar .ql-stroke {
+  @apply !stroke-foreground;
+}
+
+.ql-toolbar .ql-fill {
+  @apply !fill-foreground;
+}
+
+.ql-toolbar .ql-picker {
+  @apply !text-foreground;
+}
+
+.ql-toolbar .ql-picker-options {
+  @apply !bg-popover !border-border;
+}
+
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:focus,
+.ql-snow .ql-toolbar button:focus,
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover,
+.ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  @apply !text-primary;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button:focus .ql-stroke,
+.ql-snow .ql-toolbar button:focus .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
+  @apply !stroke-primary;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-fill,
+.ql-snow.ql-toolbar button:focus .ql-fill,
+.ql-snow .ql-toolbar button:focus .ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill {
+  @apply !fill-primary;
+}
+
+.ql-editor {
+  @apply min-h-[150px] text-base leading-relaxed;
+}
+
+.ql-editor h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.ql-editor h2 {
+  @apply text-3xl font-semibold mb-3;
+}
+
+.ql-editor h3 {
+  @apply text-2xl font-medium mb-2;
+}
+
+.ql-editor p {
+  @apply mb-4;
+}
+
+.ql-editor ul,
+.ql-editor ol {
+  @apply mb-4 ml-4;
+}
+
+.ql-editor li {
+  @apply mb-1;
+}
+
+.ql-editor blockquote {
+  @apply border-l-4 border-border pl-4 italic my-4;
+}
+
+.ql-editor code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.ql-editor pre {
+  @apply bg-muted p-4 rounded-lg my-4 font-mono text-sm;
+}
+
+.ql-editor img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+.ql-editor.ql-blank::before {
+  @apply !text-muted-foreground;
+  font-style: normal !important;
+}
+
+.ProseMirror {
+  @apply prose dark:prose-invert max-w-none;
+}
+
+.ProseMirror:focus {
+  @apply outline-none;
+}
+
+.ProseMirror > * + * {
+  @apply mt-4;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  @apply my-2 ml-4;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  @apply font-bold leading-tight;
+}
+
+.ProseMirror h1 {
+  @apply text-4xl;
+}
+
+.ProseMirror h2 {
+  @apply text-3xl;
+}
+
+.ProseMirror h3 {
+  @apply text-2xl;
+}
+
+.ProseMirror code {
+  @apply bg-muted rounded px-1.5 py-0.5 font-mono text-sm;
+}
+
+.ProseMirror pre {
+  @apply bg-muted rounded-lg p-4 font-mono text-sm;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-border pl-4 italic;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  @apply text-muted-foreground;
+  content: attr(data-placeholder);
+  float: left;
+  pointer-events: none;
+  height: 0;
+}

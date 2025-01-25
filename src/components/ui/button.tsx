@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[--radius] text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -19,11 +19,26 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        success:
+          "bg-success text-success-foreground hover:bg-success/90 focus-visible:ring-success",
+        warning:
+          "bg-warning text-warning-foreground hover:bg-warning/90 focus-visible:ring-warning",
+        info: "bg-info text-info-foreground hover:bg-info/90 focus-visible:ring-info",
+        softPrimary:
+          "bg-primary/20 text-primary hover:bg-primary/30 focus-visible:ring-primary",
+        softDestructive:
+          "bg-destructive/20 text-destructive hover:bg-destructive/30 focus-visible:ring-destructive",
+        softSuccess:
+          "bg-success/20 text-success hover:bg-success/30 focus-visible:ring-success",
+        softWarning:
+          "bg-warning/20 text-warning hover:bg-warning/30 focus-visible:ring-warning",
+        softInfo:
+          "bg-info/20 text-info hover:bg-info/30 focus-visible:ring-info",
       },
       size: {
         default: "h-9 px-4 py-2",
-        sm: "h-8 px-3 text-xs",
-        lg: "h-10 px-8",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
       },
     },
