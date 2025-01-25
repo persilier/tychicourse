@@ -28,57 +28,92 @@ interface NavigationItem {
   submenu?: SubMenuItem[];
 }
 
-const navigationItems: NavigationItem[] = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: "solar:home-2-bold-duotone",
-  },
-  {
-    title: "Analytics",
-    href: "/dashboard/analytics",
-    icon: "solar:chart-2-bold-duotone",
-  },
-  {
-    title: "Components",
-    icon: "solar:widget-5-bold-duotone",
-    submenu: [
-      {
-        title: "Buttons",
-        href: "/dashboard/components/buttons",
-      },
-      {
-        title: "Tables",
-        href: "/dashboard/components/tables",
-      },
-      {
-        title: "Forms",
-        href: "/dashboard/components/forms",
-      },
-    ],
-  },
-  {
-    title: "Users",
-    href: "/dashboard/users",
-    icon: "solar:users-group-rounded-bold-duotone",
-  },
-  {
-    title: "Settings",
-    href: "/dashboard/settings",
-    icon: "solar:settings-bold-duotone",
-  },
-];
-
-interface SidebarProps {
-  className?: string;
-}
-
-export function Sidebar({ className }: SidebarProps) {
+export function Sidebar({ className }: { className?: string }) {
   const pathname = usePathname();
   const { isVerticalLayout, sidebarCollapsed, setSidebarCollapsed } =
     useLayoutStore();
   const { sidebarColor } = useThemeStore();
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
+
+  // Get the current locale from the pathname
+  const locale = pathname.split("/")[1];
+
+  // Create navigation items with dynamic locale
+  const items = React.useMemo(
+    () => [
+      {
+        title: "Dashboard",
+        href: `/${locale}/dashboard`,
+        icon: "solar:home-2-bold-duotone",
+      },
+      {
+        title: "Analytics",
+        href: `/${locale}/dashboard/analytics`,
+        icon: "solar:chart-2-bold-duotone",
+      },
+      {
+        title: "Components",
+        icon: "solar:widget-5-bold-duotone",
+        submenu: [
+          {
+            title: "Avatar",
+            href: `/${locale}/avatar-showcase`,
+          },
+          {
+            title: "Avatar Upload",
+            href: `/${locale}/avatar-upload-showcase`,
+          },
+          {
+            title: "Badge",
+            href: `/${locale}/badge-showcase`,
+          },
+          {
+            title: "Alert",
+            href: `/${locale}/alert-showcase`,
+          },
+          {
+            title: "Card",
+            href: `/${locale}/card-showcase`,
+          },
+          {
+            title: "Card Checkbox",
+            href: `/${locale}/card-checkbox-showcase`,
+          },
+          {
+            title: "Card Radio",
+            href: `/${locale}/card-radio-showcase`,
+          },
+          {
+            title: "Confirm Dialog",
+            href: `/${locale}/confirm-dialog-showcase`,
+          },
+          {
+            title: "Date Picker",
+            href: `/${locale}/date-picker-showcase`,
+          },
+          {
+            title: "Editor",
+            href: `/${locale}/editor-showcase`,
+          },
+          {
+            title: "File Upload",
+            href: `/${locale}/file-upload-showcase`,
+          },
+        ],
+      },
+      {
+        title: "Users",
+        href: `/${locale}/dashboard/users`,
+        icon: "solar:users-group-rounded-bold-duotone",
+      },
+      {
+        title: "Settings",
+        href: `/${locale}/dashboard/settings`,
+        icon: "solar:settings-bold-duotone",
+      },
+    ],
+    [locale]
+  );
 
   const selectedSidebarColor =
     sidebarColors.find((color) => color.name === sidebarColor) ||
@@ -146,7 +181,7 @@ export function Sidebar({ className }: SidebarProps) {
                     className="flex items-center justify-center transition-all duration-200 hover:text-primary"
                   >
                     <Icon
-                      icon={navigationItems[0].icon}
+                      icon={items[0].icon}
                       className="h-6 w-6 transition-all duration-200 group-hover:scale-110"
                     />
                   </Link>
@@ -162,7 +197,7 @@ export function Sidebar({ className }: SidebarProps) {
               className="flex items-center gap-3 transition-all duration-200 hover:text-primary"
             >
               <Icon
-                icon={navigationItems[0].icon}
+                icon={items[0].icon}
                 className="h-6 w-6 transition-all duration-200 group-hover:scale-110"
               />
               <span className="font-semibold">Tychi Course</span>
@@ -175,7 +210,7 @@ export function Sidebar({ className }: SidebarProps) {
             isVerticalLayout ? "flex-col px-4" : "items-center"
           )}
         >
-          {navigationItems.map((item, index) => {
+          {items.map((item, index) => {
             const isActive = item.href
               ? pathname === item.href
               : isSubmenuActive(item);
