@@ -52,6 +52,13 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 48 96% 89%;
+    --info: 207 90% 54%;
+    --info-foreground: 202 92% 95%;
+    --success: 142 76% 36%;
+    --success-foreground: 143 85% 96%;
+  }
 }
 
 @layer base {

@@ -6,7 +6,6 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 30%; /* Increased to 30% for even lighter text */
-    --text-foreground: 240 10% 30%; /* Added text-foreground with same soft color */
 
     --card: 0 0% 100%;
     --card-foreground: 240 10% 30%;
