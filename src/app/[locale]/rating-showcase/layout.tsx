@@ -1,20 +1,26 @@
-export default function RatingShowcaseLayout({
+import { Providers } from "@/components/providers";
+import { Layout } from "@/components/layout/layout";
+
+async function getMessages(locale: string) {
+    try {
+        return (await import(`../../../../messages/${locale}.json`)).default;
+    } catch (error) {
+        return null;
+    }
+}
+
+export default async function DashboardLayout({
     children,
+    params: { locale },
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
+    params: { locale: string };
 }) {
+    const messages = await getMessages(locale);
+
     return (
-        <div className="space-y-6">
-            <div className="border-b pb-4">
-                <div className="container mx-auto px-6">
-                    <h1 className="text-3xl font-bold tracking-tight">Notation</h1>
-                    <p className="text-muted-foreground mt-2">
-                        Un composant de notation flexible et personnalisable avec support pour différentes icônes,
-                        tailles et styles. Idéal pour les avis, évaluations et systèmes de notation.
-                    </p>
-                </div>
-            </div>
-            {children}
-        </div>
-    )
+        <Providers messages={messages} locale={locale}>
+            <Layout>{children}</Layout>
+        </Providers>
+    );
 }
