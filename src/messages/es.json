@@ -1,0 +1,52 @@
+{
+    "Metadata": {
+        "title": "Tychi Course",
+        "description": "Tu plataforma de aprendizaje en línea"
+    },
+    "Layout": {
+        "Header": {
+            "notifications": "Notificaciones",
+            "profile": "Perfil",
+            "settings": "Configuración",
+            "logout": "Cerrar sesión",
+            "darkMode": "Modo oscuro",
+            "lightMode": "Modo claro"
+        }
+    },
+    "Auth": {
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "forgotPassword": "Contraseña olvidada",
+        "resetPassword": "Restablecer contraseña",
+        "emailVerification": "Verificación de correo",
+        "twoFactor": "Autenticación de dos factores"
+    },
+    "Settings": {
+        "title": "Configuración",
+        "description": "Administra la configuración de tu aplicación",
+        "auth": {
+            "title": "Autenticación",
+            "description": "Personaliza la apariencia de las páginas de autenticación",
+            "branding": {
+                "title": "Logo y marca",
+                "description": "Personaliza tu identidad visual",
+                "uploadLogo": "Formato PNG o SVG recomendado. Máx 2MB.",
+                "name": "Nombre de tu aplicación",
+                "slogan": "Tu eslogan aquí"
+            },
+            "backgrounds": {
+                "title": "Fondos",
+                "description": "Administra las imágenes de fondo",
+                "enable": "Activar",
+                "add": "Añadir",
+                "delete": "Eliminar",
+                "blur": "Desenfoque",
+                "opacity": "Opacidad"
+            },
+            "preview": {
+                "title": "Vista previa",
+                "description": "Visualiza cómo se verán tus páginas de autenticación"
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "Metadata": {
+        "title": "Tychi Course",
+        "description": "Votre plateforme d'apprentissage en ligne"
+    },
+    "Layout": {
+        "Header": {
+            "notifications": "Notifications",
+            "profile": "Profil",
+            "settings": "Paramètres",
+            "logout": "Déconnexion",
+            "darkMode": "Mode sombre",
+            "lightMode": "Mode clair"
+        }
+    },
+    "Auth": {
+        "login": "Connexion",
+        "register": "Inscription",
+        "forgotPassword": "Mot de passe oublié",
+        "resetPassword": "Réinitialiser le mot de passe",
+        "emailVerification": "Vérification de l'email",
+        "twoFactor": "Authentification à deux facteurs"
+    },
+    "Settings": {
+        "title": "Paramètres",
+        "description": "Gérez les paramètres de votre application",
+        "auth": {
+            "title": "Authentification",
+            "description": "Personnalisez l'apparence des pages d'authentification",
+            "branding": {
+                "title": "Logo et marque",
+                "description": "Personnalisez votre identité visuelle",
+                "uploadLogo": "Format PNG ou SVG recommandé. Max 2MB.",
+                "name": "Nom de votre application",
+                "slogan": "Votre slogan ici"
+            },
+            "backgrounds": {
+                "title": "Arrière-plans",
+                "description": "Gérez les images d'arrière-plan",
+                "enable": "Activer",
+                "add": "Ajouter",
+                "delete": "Supprimer",
+                "blur": "Flou",
+                "opacity": "Opacité"
+            },
+            "preview": {
+                "title": "Aperçu",
+                "description": "Visualisez l'apparence de vos pages d'authentification"
+            }
+        }
+    }
+}

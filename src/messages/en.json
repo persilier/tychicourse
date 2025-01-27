@@ -1,0 +1,52 @@
+{
+    "Metadata": {
+        "title": "Tychi Course",
+        "description": "Your online learning platform"
+    },
+    "Layout": {
+        "Header": {
+            "notifications": "Notifications",
+            "profile": "Profile",
+            "settings": "Settings",
+            "logout": "Log out",
+            "darkMode": "Dark mode",
+            "lightMode": "Light mode"
+        }
+    },
+    "Auth": {
+        "login": "Log in",
+        "register": "Register",
+        "forgotPassword": "Forgot Password",
+        "resetPassword": "Reset Password",
+        "emailVerification": "Email Verification",
+        "twoFactor": "Two Factor Authentication"
+    },
+    "Settings": {
+        "title": "Settings",
+        "description": "Manage your application settings",
+        "auth": {
+            "title": "Authentication",
+            "description": "Customize the appearance of authentication pages",
+            "branding": {
+                "title": "Logo & Branding",
+                "description": "Customize your visual identity",
+                "uploadLogo": "PNG or SVG format recommended. Max 2MB.",
+                "name": "Your application name",
+                "slogan": "Your slogan here"
+            },
+            "backgrounds": {
+                "title": "Backgrounds",
+                "description": "Manage background images",
+                "enable": "Enable",
+                "add": "Add",
+                "delete": "Delete",
+                "blur": "Blur",
+                "opacity": "Opacity"
+            },
+            "preview": {
+                "title": "Preview",
+                "description": "See how your authentication pages will look"
+            }
+        }
+    }
+}

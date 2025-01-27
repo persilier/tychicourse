@@ -1,115 +1,164 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-"use client";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Icon } from "@iconify/react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import Link from "next/link"
+import { LucideProps } from "lucide-react"
+import {
+  AlertTriangle,
+  Bell,
+  FileStack,
+  Image as ImageIcon,
+  Upload,
+  BadgeCheck,
+  LayoutGrid,
+  Terminal,
+  AlertCircle,
+  Info,
+  SlidersHorizontal,
+  GripHorizontal,
+} from "lucide-react"
+import { usePathname } from "next/navigation"
 
-const components = [
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+
+interface NavItem {
+  title: string
+  href?: string
+  label?: string
+  icon?: React.ComponentType<LucideProps>
+  variant?: "default" | "ghost"
+}
+
+interface NavSection {
+  title: string
+  items: NavItem[]
+}
+
+const sections: NavSection[] = [
   {
-    title: "Basic",
+    title: "Showcase",
     items: [
-      {
-        title: "Button",
-        href: "#button",
-        icon: "square-2-stack",
-      },
-      {
-        title: "Badge",
-        href: "#badge",
-        icon: "bookmark",
-      },
-      {
-        title: "Card",
-        href: "#card",
-        icon: "rectangle-stack",
-      },
       {
         title: "Alert",
-        href: "#alert",
-        icon: "exclamation-triangle",
-      },
-    ],
-  },
-  {
-    title: "Data Display",
-    items: [
-      {
-        title: "Table",
-        href: "#table",
-        icon: "table-cells",
+        href: "/alert-showcase",
+        icon: AlertCircle,
       },
       {
         title: "Avatar",
-        href: "#avatar",
-        icon: "user-circle",
+        href: "/avatar-showcase",
+        icon: ImageIcon,
+      },
+      {
+        title: "Avatar Upload",
+        href: "/avatar-upload-showcase",
+        icon: Upload,
+      },
+      {
+        title: "Badge",
+        href: "/badge-showcase",
+        icon: BadgeCheck,
+      },
+      {
+        title: "Breadcrumbs",
+        href: "/breadcrumbs-showcase",
+        icon: GripHorizontal,
+      },
+      {
+        title: "Card",
+        href: "/card-showcase",
+        icon: LayoutGrid,
+      },
+      {
+        title: "Confirm Dialog",
+        href: "/confirm-dialog-showcase",
+        icon: AlertTriangle,
+      },
+      {
+        title: "Editor",
+        href: "/editor-showcase",
+        icon: Terminal,
+      },
+      {
+        title: "File Upload",
+        href: "/file-upload-showcase",
+        icon: FileStack,
+      },
+      {
+        title: "Rating",
+        href: "/rating-showcase",
+        icon: Info,
+      },
+      {
+        title: "Select",
+        href: "/select-showcase",
+        icon: SlidersHorizontal,
+      },
+      {
+        title: "Toast",
+        href: "/toast-showcase",
+        icon: Bell,
       },
     ],
   },
   {
-    title: "Form",
+    title: "Pages",
     items: [
       {
-        title: "Input",
-        href: "#input",
-        icon: "square-3-stack-3d",
-      },
-      {
-        title: "Checkbox",
-        href: "#checkbox",
-        icon: "check-circle",
-      },
-      {
-        title: "Select",
-        href: "#select",
-        icon: "chevron-up-down",
+        title: "Pages d'Erreur",
+        href: "/error-pages",
+        icon: AlertTriangle,
       },
     ],
   },
-];
+]
 
-interface ComponentsNavProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export function ComponentsNav({ className, ...props }: ComponentsNavProps) {
-  const pathname = usePathname();
+export function ComponentsNav() {
+  const pathname = usePathname()
 
   return (
-    <div className={cn("relative", className)} {...props}>
-      <ScrollArea className="h-[calc(100vh-3.5rem)] pb-10">
-        <div className="space-y-4 py-4">
-          {components.map((section) => (
-            <div key={section.title} className="px-3 py-2">
-              <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                {section.title}
-              </h2>
-              <div className="space-y-1">
-                {section.items.map((item) => (
-                  <Button
-                    key={item.href}
-                    variant="ghost"
-                    className={cn(
-                      "w-full justify-start",
-                      pathname === item.href && "bg-accent"
-                    )}
-                    asChild
-                  >
-                    <Link href={item.href}>
-                      <Icon
-                        icon={`heroicons:${item.icon}`}
-                        className="mr-2 h-4 w-4"
-                      />
-                      {item.title}
-                    </Link>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ))}
+    <div className="space-y-4">
+      {sections.map((section) => (
+        <div key={section.title} className="space-y-2">
+          <h4 className="px-2 text-sm font-semibold">{section.title}</h4>
+          <div className="grid grid-flow-row auto-rows-max gap-1 text-sm">
+            {section.items.map((item) =>
+              !item.href ? (
+                <span
+                  key={item.title}
+                  className={cn(
+                    buttonVariants({ variant: item.variant ?? "ghost" }),
+                    "justify-start"
+                  )}
+                >
+                  {item.title}
+                </span>
+              ) : (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "justify-start",
+                    pathname?.startsWith(item.href)
+                      ? "bg-muted font-medium text-foreground hover:bg-muted"
+                      : "font-normal"
+                  )}
+                >
+                  {item.icon && (
+                    <item.icon className="mr-2 h-4 w-4" />
+                  )}
+                  {item.title}
+                  {item.label && (
+                    <span className="ml-2 rounded-md bg-[#ff0000] px-1.5 py-0.5 text-xs leading-none text-[#ffffff] no-underline group-hover:no-underline">
+                      {item.label}
+                    </span>
+                  )}
+                </Link>
+              )
+            )}
+          </div>
         </div>
-      </ScrollArea>
+      ))}
     </div>
-  );
+  )
 }

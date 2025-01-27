@@ -39,6 +39,28 @@ const toastVariants = cva(
           "info group border-blue-500 bg-blue-500 text-white dark:border-blue-600 dark:bg-blue-600",
         primary:
           "primary group border-primary bg-primary text-primary-foreground",
+        // Soft variants avec fond légèrement coloré
+        softDestructive:
+          "bg-destructive/10 border-destructive/30 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        softSuccess:
+          "bg-green-50 border-green-500/30 text-green-700 dark:bg-green-950 dark:border-green-500 dark:text-green-400",
+        softWarning:
+          "bg-yellow-50 border-yellow-500/30 text-yellow-700 dark:bg-yellow-950 dark:border-yellow-500 dark:text-yellow-400",
+        softInfo:
+          "bg-blue-50 border-blue-500/30 text-blue-700 dark:bg-blue-950 dark:border-blue-500 dark:text-blue-400",
+        softPrimary:
+          "bg-primary/10 border-primary/30 text-primary dark:border-primary [&>svg]:text-primary",
+        // Light variants avec fond blanc
+        lightDestructive:
+          "bg-background border-destructive text-destructive [&>svg]:text-destructive",
+        lightSuccess:
+          "bg-background border-green-500 text-green-700 dark:text-green-500 [&>svg]:text-green-500",
+        lightWarning:
+          "bg-background border-yellow-500 text-yellow-700 dark:text-yellow-500 [&>svg]:text-yellow-500",
+        lightInfo:
+          "bg-background border-blue-500 text-blue-700 dark:text-blue-500 [&>svg]:text-blue-500",
+        lightPrimary:
+          "bg-background border-primary text-primary [&>svg]:text-primary",
       },
     },
     defaultVariants: {

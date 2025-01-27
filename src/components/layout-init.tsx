@@ -1,15 +1,25 @@
-"use client";
+"use client"
 
-import { useLayoutStore } from "@/store/layout-store";
-import { useEffect } from "react";
+import { useLayoutStore } from "@/store/layout-store"
+import { useEffect } from "react"
+import { PropsWithChildren } from "react"
 
-export function LayoutInit() {
-  const { radius, setRadius } = useLayoutStore();
+export function LayoutInit({ children }: PropsWithChildren) {
+  const { setSidebarCollapsed } = useLayoutStore()
 
   useEffect(() => {
-    // Apply the radius on mount
-    setRadius(radius);
-  }, [radius, setRadius]);
+    // Initialiser le layout en fonction de la taille de l'écran
+    const handleResize = () => {
+      setSidebarCollapsed(window.innerWidth < 1024)
+    }
 
-  return null;
+    handleResize()
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [setSidebarCollapsed])
+
+  return children
 }

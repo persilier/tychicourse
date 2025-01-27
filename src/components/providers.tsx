@@ -1,20 +1,24 @@
-"use client";
+"use client"
 
-import { NextIntlClientProvider } from "next-intl";
-import { ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { StoreProvider } from "@/components/store-provider"
+import { LayoutInit } from "@/components/layout-init"
 
-export function Providers({
-  locale,
-  messages,
-  children,
-}: {
-  locale: string;
-  messages: any;
-  children: ReactNode;
-}) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  );
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <StoreProvider>
+        <LayoutInit>
+          {children}
+          <Toaster />
+        </LayoutInit>
+      </StoreProvider>
+    </ThemeProvider>
+  )
 }

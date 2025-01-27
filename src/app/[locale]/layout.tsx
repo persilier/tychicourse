@@ -1,47 +1,40 @@
-import { Inter } from "next/font/google";
-import { notFound } from "next/navigation";
-import "../globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Customizer } from "@/components/layout/layout-customizer";
-import { ThemeInit } from "@/components/theme-init";
-import { LayoutInit } from "@/components/layout-init";
-import { locales } from "@/config/locale";
-import { unstable_setRequestLocale } from "next-intl/server";
-import { cn } from "@/lib/utils";
+import { Providers } from "@/components/providers"
+import { unstable_setRequestLocale } from "next-intl/server"
+import { getMessages } from "@/config/i18n"
+import { NextIntlClientProvider } from "next-intl"
 
-const inter = Inter({ subsets: ["latin"] });
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+export async function generateMetadata({
+  params: { locale }
+}: {
+  params: { locale: string }
+}) {
+  return {
+    title: "Tychi Course",
+    description: "Your learning platform",
+  }
 }
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
   params: { locale },
 }: {
-  children: React.ReactNode;
-  params: { locale: string };
+  children: React.ReactNode
+  params: { locale: string }
 }) {
-  if (!locales.includes(locale as any)) notFound();
-
-  unstable_setRequestLocale(locale);
+  await unstable_setRequestLocale(locale)
+  const messages = await getMessages(locale)
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ThemeInit />
-          <LayoutInit />
-          {children}
-          <Customizer />
-          <div id="date-picker-portal" />
-        </ThemeProvider>
+      <body suppressHydrationWarning>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <Providers>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
-  );
+  )
+}
+
+export function generateStaticParams() {
+  return [{ locale: "fr" }, { locale: "en" }, { locale: "es" }]
 }

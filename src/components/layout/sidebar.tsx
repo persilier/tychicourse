@@ -1,42 +1,42 @@
-"use client";
+"use client"
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useLayoutStore } from "@/store/layout-store";
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useLayoutStore } from "@/store/layout-store"
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import React from "react";
-import { Icon } from "@iconify/react";
-import { useThemeStore, sidebarColors } from "@/store/theme-store";
+} from "@/components/ui/tooltip"
+import React from "react"
+import { Icon } from "@iconify/react"
+import { useThemeStore, sidebarColors } from "@/store/theme-store"
 
 interface SubMenuItem {
-  title: string;
-  href: string;
+  title: string
+  href: string
 }
 
 interface NavigationItem {
-  title: string;
-  href?: string;
-  icon: string;
-  submenu?: SubMenuItem[];
+  title: string
+  href?: string
+  icon: string
+  submenu?: SubMenuItem[]
 }
 
 export function Sidebar({ className }: { className?: string }) {
-  const pathname = usePathname();
+  const pathname = usePathname()
   const { isVerticalLayout, sidebarCollapsed, setSidebarCollapsed } =
-    useLayoutStore();
-  const { sidebarColor } = useThemeStore();
-  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
+    useLayoutStore()
+  const { sidebarColor } = useThemeStore()
+  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null)
 
   // Get the current locale from the pathname
-  const locale = pathname.split("/")[1];
+  const locale = pathname.split("/")[1]
 
   // Create navigation items with dynamic locale
   const items = React.useMemo(
@@ -56,6 +56,10 @@ export function Sidebar({ className }: { className?: string }) {
         icon: "solar:widget-5-bold-duotone",
         submenu: [
           {
+            title: "Alert",
+            href: `/${locale}/alert-showcase`,
+          },
+          {
             title: "Avatar",
             href: `/${locale}/avatar-showcase`,
           },
@@ -68,28 +72,16 @@ export function Sidebar({ className }: { className?: string }) {
             href: `/${locale}/badge-showcase`,
           },
           {
-            title: "Alert",
-            href: `/${locale}/alert-showcase`,
+            title: "Breadcrumbs",
+            href: `/${locale}/breadcrumbs-showcase`,
           },
           {
             title: "Card",
             href: `/${locale}/card-showcase`,
           },
           {
-            title: "Card Checkbox",
-            href: `/${locale}/card-checkbox-showcase`,
-          },
-          {
-            title: "Card Radio",
-            href: `/${locale}/card-radio-showcase`,
-          },
-          {
             title: "Confirm Dialog",
             href: `/${locale}/confirm-dialog-showcase`,
-          },
-          {
-            title: "Date Picker",
-            href: `/${locale}/date-picker-showcase`,
           },
           {
             title: "Editor",
@@ -98,6 +90,32 @@ export function Sidebar({ className }: { className?: string }) {
           {
             title: "File Upload",
             href: `/${locale}/file-upload-showcase`,
+          },
+          {
+            title: "Rating",
+            href: `/${locale}/rating-showcase`,
+          },
+          {
+            title: "Select",
+            href: `/${locale}/select-showcase`,
+          },
+          {
+            title: "Toast",
+            href: `/${locale}/toast-showcase`,
+          },
+        ],
+      },
+      {
+        title: "Pages",
+        icon: "solar:documents-minimalistic-bold-duotone",
+        submenu: [
+          {
+            title: "Pages d'Erreur",
+            href: `/${locale}/error-pages`,
+          },
+          {
+            title: "Authentication",
+            href: `/${locale}/auth`,
           },
         ],
       },
@@ -108,37 +126,54 @@ export function Sidebar({ className }: { className?: string }) {
       },
       {
         title: "Settings",
-        href: `/${locale}/dashboard/settings`,
         icon: "solar:settings-bold-duotone",
+        submenu: [
+          {
+            title: "Général",
+            href: `/${locale}/settings`,
+          },
+          {
+            title: "Authentication",
+            href: `/${locale}/settings/auth`,
+          },
+          {
+            title: "Notifications",
+            href: `/${locale}/settings/notifications`,
+          },
+          {
+            title: "Sécurité",
+            href: `/${locale}/settings/security`,
+          },
+        ],
       },
     ],
     [locale]
-  );
+  )
 
   const selectedSidebarColor =
     sidebarColors.find((color) => color.name === sidebarColor) ||
-    sidebarColors[0];
+    sidebarColors[0]
 
   const toggleSubmenu = (title: string) => {
     if (sidebarCollapsed) {
-      setSidebarCollapsed(false);
-      setOpenSubmenu(title);
+      setSidebarCollapsed(false)
+      setOpenSubmenu(title)
     } else {
-      setOpenSubmenu(openSubmenu === title ? null : title);
+      setOpenSubmenu(openSubmenu === title ? null : title)
     }
-  };
+  }
 
   const isSubmenuActive = (item: NavigationItem) => {
-    if (!item.submenu) return false;
-    return item.submenu.some((subItem) => pathname === subItem.href);
-  };
+    if (!item.submenu) return false
+    return item.submenu.some((subItem) => pathname === subItem.href)
+  }
 
   // When collapsing the sidebar, close any open submenu
   React.useEffect(() => {
     if (sidebarCollapsed) {
-      setOpenSubmenu(null);
+      setOpenSubmenu(null)
     }
-  }, [sidebarCollapsed]);
+  }, [sidebarCollapsed])
 
   return (
     <div
@@ -149,9 +184,9 @@ export function Sidebar({ className }: { className?: string }) {
         selectedSidebarColor.color,
         isVerticalLayout
           ? cn(
-              "transition-all duration-300 ease-in-out",
-              sidebarCollapsed ? "w-[80px]" : "w-[280px]"
-            )
+            "transition-all duration-300 ease-in-out",
+            sidebarCollapsed ? "w-[80px]" : "w-[280px]"
+          )
           : "w-full",
         className
       )}
@@ -169,7 +204,7 @@ export function Sidebar({ className }: { className?: string }) {
           className={cn(
             "flex items-center mb-6",
             isVerticalLayout &&
-              cn("px-6", sidebarCollapsed ? "justify-center px-0" : "")
+            cn("px-6", sidebarCollapsed ? "justify-center px-0" : "")
           )}
         >
           {sidebarCollapsed ? (
@@ -213,8 +248,8 @@ export function Sidebar({ className }: { className?: string }) {
           {items.map((item, index) => {
             const isActive = item.href
               ? pathname === item.href
-              : isSubmenuActive(item);
-            const hasSubmenu = !!item.submenu;
+              : isSubmenuActive(item)
+            const hasSubmenu = !!item.submenu
 
             if (sidebarCollapsed && isVerticalLayout) {
               return (
@@ -229,9 +264,9 @@ export function Sidebar({ className }: { className?: string }) {
                             isActive
                               ? selectedSidebarColor.active
                               : cn(
-                                  selectedSidebarColor.muted,
-                                  selectedSidebarColor.hover
-                                )
+                                selectedSidebarColor.muted,
+                                selectedSidebarColor.hover
+                              )
                           )}
                         >
                           <Icon
@@ -250,9 +285,9 @@ export function Sidebar({ className }: { className?: string }) {
                             isActive
                               ? selectedSidebarColor.active
                               : cn(
-                                  selectedSidebarColor.muted,
-                                  selectedSidebarColor.hover
-                                )
+                                selectedSidebarColor.muted,
+                                selectedSidebarColor.hover
+                              )
                           )}
                         >
                           <Icon
@@ -271,7 +306,7 @@ export function Sidebar({ className }: { className?: string }) {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              );
+              )
             }
 
             if (hasSubmenu) {
@@ -284,9 +319,9 @@ export function Sidebar({ className }: { className?: string }) {
                       isActive
                         ? selectedSidebarColor.active
                         : cn(
-                            selectedSidebarColor.muted,
-                            selectedSidebarColor.hover
-                          )
+                          selectedSidebarColor.muted,
+                          selectedSidebarColor.hover
+                        )
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -309,7 +344,7 @@ export function Sidebar({ className }: { className?: string }) {
                   {openSubmenu === item.title && (
                     <div className="ml-4 space-y-1 border-l pl-4">
                       {item.submenu?.map((subItem, subIndex) => {
-                        const isSubActive = pathname === subItem.href;
+                        const isSubActive = pathname === subItem.href
                         return (
                           <Link
                             key={subIndex}
@@ -319,9 +354,9 @@ export function Sidebar({ className }: { className?: string }) {
                               isSubActive
                                 ? selectedSidebarColor.active
                                 : cn(
-                                    selectedSidebarColor.muted,
-                                    selectedSidebarColor.hover
-                                  )
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
                             )}
                           >
                             <div className="flex items-center gap-2">
@@ -331,9 +366,9 @@ export function Sidebar({ className }: { className?: string }) {
                                   isSubActive
                                     ? selectedSidebarColor.active
                                     : cn(
-                                        selectedSidebarColor.muted,
-                                        selectedSidebarColor.hover
-                                      )
+                                      selectedSidebarColor.muted,
+                                      selectedSidebarColor.hover
+                                    )
                                 )}
                               />
                               <span>{subItem.title}</span>
@@ -342,12 +377,12 @@ export function Sidebar({ className }: { className?: string }) {
                               <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                             )}
                           </Link>
-                        );
+                        )
                       })}
                     </div>
                   )}
                 </div>
-              );
+              )
             }
 
             return (
@@ -370,7 +405,7 @@ export function Sidebar({ className }: { className?: string }) {
                   <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                 )}
               </Link>
-            );
+            )
           })}
         </nav>
       </div>
@@ -390,5 +425,5 @@ export function Sidebar({ className }: { className?: string }) {
         </Button>
       )}
     </div>
-  );
+  )
 }
