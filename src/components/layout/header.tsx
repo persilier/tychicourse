@@ -300,6 +300,9 @@ export function Header() {
           </DropdownMenu>
         </div>
 
+        <ThemeToggle />
+        <LanguageSwitcher />
+
         {/* User menu */}
         <div className="relative">
           <DropdownMenu>
@@ -442,9 +445,6 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-
-        <ThemeToggle />
-        <LanguageSwitcher />
       </div>
     </header>
   )
