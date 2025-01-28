@@ -150,7 +150,7 @@ export function Header() {
       </div>
 
       {/* Right section */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-6">
         {/* Quick Actions */}
         <div className="relative">
           <DropdownMenu>
