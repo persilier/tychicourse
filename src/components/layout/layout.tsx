@@ -3,6 +3,7 @@
 import { useLayoutStore } from "@/store/layout-store";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
+import { Customizer } from "./layout-customizer";
 import { cn } from "@/lib/utils";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -61,6 +62,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex-1 overflow-y-auto p-4 md:p-8">{children}</div>
         </main>
       </div>
+      <Customizer />
     </div>
   );
 }

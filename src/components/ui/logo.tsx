@@ -26,7 +26,7 @@ const logoVariants = cva("flex items-center gap-2 transition-opacity hover:opaci
     },
 })
 
-interface LogoProps extends VariantProps<typeof logoVariants> {
+export interface LogoProps extends VariantProps<typeof logoVariants> {
     src?: string
     darkSrc?: string
     name?: string
@@ -61,14 +61,17 @@ export function Logo({
         <WithLink>
             <div className={cn(logoVariants({ size, variant }), className)}>
                 {/* Logo */}
-                <div className="relative h-8 w-8 shrink-0">
-                    <Image
-                        src={logoSrc}
-                        alt={name}
-                        fill
-                        className="object-contain"
-                    />
-                </div>
+                {logoSrc && (
+                    <div className="relative h-8 w-8 shrink-0">
+                        <Image
+                            src={logoSrc}
+                            alt={name}
+                            fill
+                            className="object-contain"
+                            unoptimized={logoSrc.startsWith('data:')}
+                        />
+                    </div>
+                )}
 
                 {/* Text Content */}
                 <div className="flex flex-col">

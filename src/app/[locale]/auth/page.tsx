@@ -48,7 +48,7 @@ export default function AuthShowcase() {
             title: "Vérification Email",
             description: "Vérification de l'adresse email",
             icon: Mail,
-            path: "/auth/email-verification",
+            path: "/auth/verify-email",
             color: "bg-indigo-500/10 text-indigo-500",
         },
         {
