@@ -12,6 +12,10 @@
             "darkMode": "Mode sombre",
             "lightMode": "Mode clair",
             "search": "Rechercher...",
+            "searchPlaceholder": "Tapez une commande ou recherchez...",
+            "noResults": "Aucun résultat trouvé.",
+            "quickNav": "Navigation rapide",
+            "actions": "Actions rapides",
             "dashboard": "Tableau de bord",
             "courses": "Cours",
             "latestUpdates": "Dernières mises à jour",
@@ -42,7 +46,17 @@
             "viewAndEditProfile": "Voir et modifier votre profil",
             "customizeExperience": "Personnaliser votre expérience",
             "manageSecuritySettings": "Gérer les paramètres de sécurité",
-            "signOutOfAccount": "Se déconnecter de votre compte"
+            "signOutOfAccount": "Se déconnecter de votre compte",
+            "language": {
+                "select": "Sélectionner la langue",
+                "choose": "Choisissez votre langue préférée",
+                "english": "Anglais",
+                "french": "Français",
+                "spanish": "Espagnol",
+                "unitedKingdom": "Royaume-Uni",
+                "france": "France",
+                "spain": "Espagne"
+            }
         }
     },
     "Auth": {

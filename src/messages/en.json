@@ -12,6 +12,10 @@
             "darkMode": "Dark mode",
             "lightMode": "Light mode",
             "search": "Search...",
+            "searchPlaceholder": "Type a command or search...",
+            "noResults": "No results found.",
+            "quickNav": "Quick Navigation",
+            "actions": "Quick Actions",
             "dashboard": "Dashboard",
             "courses": "Courses",
             "latestUpdates": "Latest updates",
@@ -42,7 +46,17 @@
             "viewAndEditProfile": "View and edit your profile",
             "customizeExperience": "Customize your experience",
             "manageSecuritySettings": "Manage security settings",
-            "signOutOfAccount": "Sign out of your account"
+            "signOutOfAccount": "Sign out of your account",
+            "language": {
+                "select": "Select Language",
+                "choose": "Choose your preferred language",
+                "english": "English",
+                "french": "French",
+                "spanish": "Spanish",
+                "unitedKingdom": "United Kingdom",
+                "france": "France",
+                "spain": "Spain"
+            }
         }
     },
     "Auth": {

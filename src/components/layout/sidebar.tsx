@@ -12,6 +12,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import React from "react"
 import { Icon } from "@iconify/react"
 import { useThemeStore, sidebarColors } from "@/store/theme-store"
@@ -310,6 +316,58 @@ export function Sidebar({ className }: { className?: string }) {
             }
 
             if (hasSubmenu) {
+              if (!isVerticalLayout) {
+                // Horizontal layout - use dropdown menu
+                return (
+                  <DropdownMenu key={index}>
+                    <DropdownMenuTrigger asChild>
+                      <button
+                        className={cn(
+                          "group relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all duration-200",
+                          isActive
+                            ? selectedSidebarColor.active
+                            : cn(
+                              selectedSidebarColor.muted,
+                              selectedSidebarColor.hover
+                            )
+                        )}
+                      >
+                        <div className="flex items-center gap-2">
+                          <Icon
+                            icon={item.icon}
+                            className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                          />
+                          <span>{item.title}</span>
+                        </div>
+                        <ChevronDown
+                          className="h-4 w-4 transition-transform duration-200"
+                        />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      align="start"
+                      className="w-56"
+                      sideOffset={8}
+                    >
+                      {item.submenu?.map((subItem, subIndex) => (
+                        <DropdownMenuItem key={subIndex} asChild>
+                          <Link
+                            href={subItem.href}
+                            className={cn(
+                              "flex w-full items-center px-2 py-1.5",
+                              pathname === subItem.href && "text-primary"
+                            )}
+                          >
+                            {subItem.title}
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )
+              }
+
+              // Vertical layout - use expandable menu
               return (
                 <div key={index} className="w-full space-y-1">
                   <button
