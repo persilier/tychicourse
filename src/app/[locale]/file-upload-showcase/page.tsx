@@ -1,59 +1,73 @@
 "use client";
 
-import { useState } from "react";
 import { FileUpload } from "@/components/ui/file-upload";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 export default function FileUploadShowcase() {
-  const [files, setFiles] = useState<File[]>([]);
+  const t = useTranslations();
+
+  const handleFilesChange = (files: File[]) => {
+    console.log("Files uploaded:", files);
+  };
 
   return (
     <div className="container py-10">
       <div className="mx-auto max-w-3xl space-y-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>File Upload Component</CardTitle>
-            <CardDescription>
-              A beautiful and modern file upload component with drag and drop
-              support, file preview, and progress indicators.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-8">
-            {/* Default Configuration */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">Default Configuration</h3>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold">File Upload Component</h1>
+          <p className="text-lg text-muted-foreground">
+            A beautiful and functional file upload component with multiple file drag and drop support.
+          </p>
+        </div>
+
+        <div className="grid gap-6">
+          {/* Default Example */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Multiple File Upload</CardTitle>
+              <CardDescription>
+                Upload up to 5 files of any supported type at once.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <FileUpload
-                onChange={(files) => console.log("Files:", files)}
-                onError={(error) => console.log("Error:", error)}
+                onChange={handleFilesChange}
+                maxFiles={5}
+                maxSize={5 * 1024 * 1024} // 5MB
               />
-            </div>
+            </CardContent>
+          </Card>
 
-            <Separator />
-
-            {/* Images Only */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">Images Only</h3>
+          {/* Images Only */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Multiple Images</CardTitle>
+              <CardDescription>
+                Upload up to 3 images at once. Supports PNG, JPG, GIF, and WebP.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <FileUpload
                 accept={{
                   "image/*": [".png", ".jpg", ".jpeg", ".gif", ".webp"],
                 }}
                 maxFiles={3}
-                onChange={(files) => console.log("Image files:", files)}
+                maxSize={2 * 1024 * 1024} // 2MB
+                onChange={handleFilesChange}
               />
-            </div>
+            </CardContent>
+          </Card>
 
-            <Separator />
-
-            {/* Documents Only */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">Documents Only</h3>
+          {/* Documents Only */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Multiple Documents</CardTitle>
+              <CardDescription>
+                Upload up to 2 documents at once. Supports PDF and Office files.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
               <FileUpload
                 accept={{
                   "application/pdf": [".pdf"],
@@ -62,30 +76,11 @@ export default function FileUploadShowcase() {
                 }}
                 maxFiles={2}
                 maxSize={10 * 1024 * 1024} // 10MB
-                onChange={(files) => console.log("Document files:", files)}
+                onChange={handleFilesChange}
               />
-            </div>
-
-            <Separator />
-
-            {/* Error State */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">Error State</h3>
-              <FileUpload
-                error="Invalid file type selected"
-                onChange={(files) => console.log("Files:", files)}
-              />
-            </div>
-
-            <Separator />
-
-            {/* Disabled State */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium">Disabled State</h3>
-              <FileUpload disabled />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

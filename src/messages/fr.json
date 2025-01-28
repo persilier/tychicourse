@@ -56,7 +56,36 @@
                 "unitedKingdom": "Royaume-Uni",
                 "france": "France",
                 "spain": "Espagne"
+            },
+            "navigation": {
+                "dashboard": "Tableau de bord",
+                "authentication": "Authentification",
+                "toastShowcase": "Toast",
+                "modalShowcase": "Exemple de modal"
             }
+        },
+        "Customizer": {
+            "title": "Personnaliser",
+            "description": "Personnalisez votre expérience",
+            "magicTip": "Les changements sont enregistrés automatiquement",
+            "openCustomizer": "Ouvrir le personnalisateur",
+            "layoutSettings": "Paramètres de mise en page",
+            "resetToDefaults": "Réinitialiser",
+            "layout": "Mise en page",
+            "verticalLayout": "Mise en page verticale",
+            "horizontalLayout": "Mise en page horizontale",
+            "theme": "Thème",
+            "light": "Clair",
+            "dark": "Sombre",
+            "system": "Système",
+            "borderRadius": "Coins arrondis",
+            "square": "Carré",
+            "small": "Petit",
+            "medium": "Moyen",
+            "large": "Grand",
+            "full": "Complet",
+            "accentColor": "Couleur d'accent",
+            "sidebarTheme": "Thème de la barre latérale"
         }
     },
     "Auth": {
@@ -92,6 +121,58 @@
             "preview": {
                 "title": "Aperçu",
                 "description": "Visualisez l'apparence de vos pages d'authentification"
+            }
+        }
+    },
+    "Common": {
+        "Modal": {
+            "createTitle": "Créer",
+            "editTitle": "Modifier",
+            "deleteTitle": "Supprimer",
+            "viewTitle": "Voir les détails",
+            "createDescription": "Remplissez les informations ci-dessous pour créer un nouvel élément",
+            "editDescription": "Modifiez les informations ci-dessous pour mettre à jour cet élément",
+            "deleteDescription": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+            "viewDescription": "Voir les détails de cet élément"
+        }
+    },
+    "Showcase": {
+        "Modal": {
+            "title": "Composant Modal",
+            "description": "Un composant modal élégant et polyvalent avec différentes tailles, variantes d'en-tête et modes d'opération.",
+            "sizeVariants": {
+                "title": "Variantes de taille",
+                "description": "Différentes options de taille pour s'adapter à vos besoins",
+                "modalTitle": "Exemple de modal {size}",
+                "modalContent": "Cette modal démontre la variante de taille {size}. La zone de contenu s'ajuste automatiquement à la taille de la modal."
+            },
+            "headerVariants": {
+                "title": "Variantes d'en-tête",
+                "description": "Différents styles d'en-tête pour différents contextes",
+                "modalTitle": "Exemple d'en-tête {variant}",
+                "modalContent": "Cette modal démontre la variante d'en-tête {variant} avec son style de dégradé unique."
+            },
+            "operationModes": {
+                "title": "Modes d'opération",
+                "description": "Modes préconfigurés pour les opérations courantes",
+                "deleteMessage": "Cette action ne peut pas être annulée. Cela supprimera définitivement cet élément.",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "patternToggle": {
+                "title": "Motif décoratif",
+                "description": "Activer/désactiver le motif floral dans l'en-tête",
+                "withPattern": "Avec motif",
+                "withoutPattern": "Sans motif",
+                "modalTitle": "Exemple de superposition de motif",
+                "withPatternContent": "Cette modal inclut le beau motif floral dans son en-tête.",
+                "withoutPatternContent": "Cette modal a un en-tête épuré sans motif."
+            },
+            "form": {
+                "name": "Nom",
+                "namePlaceholder": "Entrez le nom",
+                "description": "Description",
+                "descriptionPlaceholder": "Entrez la description"
             }
         }
     }

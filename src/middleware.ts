@@ -21,6 +21,10 @@ const validPaths = [
     '/showcase',
     '/error-pages',
     '/test-error',
+    '/modal-showcase',
+    '/toast-showcase',
+    '/file-upload-showcase',
+    '/avatar-upload-showcase',
     // Add other valid paths here
 ];
 
@@ -33,7 +37,14 @@ const publicPages = [
     '/verify-email',
     '/error-pages',
     '/not-found',
-    '/'
+    '/',
+    '/modal-showcase',
+    '/toast-showcase',
+    '/file-upload-showcase',
+    '/avatar-upload-showcase',
+    '/user-management',
+    '/user-profile',
+    '/user-settings',
 ];
 
 export default async function middleware(request: NextRequest) {

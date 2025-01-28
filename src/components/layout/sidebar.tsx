@@ -1,48 +1,49 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useLayoutStore } from "@/store/layout-store"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useLayoutStore } from "@/store/layout-store";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import React from "react"
-import { Icon } from "@iconify/react"
-import { useThemeStore, sidebarColors } from "@/store/theme-store"
+} from "@/components/ui/dropdown-menu";
+import React from "react";
+import { ClientLogo } from "@/components/auth/client-logo";
+import { Icon } from "@iconify/react";
+import { useThemeStore, sidebarColors } from "@/store/theme-store";
 
 interface SubMenuItem {
-  title: string
-  href: string
+  title: string;
+  href: string;
 }
 
 interface NavigationItem {
-  title: string
-  href?: string
-  icon: string
-  submenu?: SubMenuItem[]
+  title: string;
+  href?: string;
+  icon: string;
+  submenu?: SubMenuItem[];
 }
 
 export function Sidebar({ className }: { className?: string }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const { isVerticalLayout, sidebarCollapsed, setSidebarCollapsed } =
-    useLayoutStore()
-  const { sidebarColor } = useThemeStore()
-  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null)
+    useLayoutStore();
+  const { sidebarColor } = useThemeStore();
+  const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
 
   // Get the current locale from the pathname
-  const locale = pathname.split("/")[1]
+  const locale = pathname.split("/")[1];
 
   // Create navigation items with dynamic locale
   const items = React.useMemo(
@@ -98,6 +99,10 @@ export function Sidebar({ className }: { className?: string }) {
             href: `/${locale}/file-upload-showcase`,
           },
           {
+            title: "Modal",
+            href: `/${locale}/modal-showcase`,
+          },
+          {
             title: "Rating",
             href: `/${locale}/rating-showcase`,
           },
@@ -127,8 +132,21 @@ export function Sidebar({ className }: { className?: string }) {
       },
       {
         title: "Users",
-        href: `/${locale}/dashboard/users`,
         icon: "solar:users-group-rounded-bold-duotone",
+        submenu: [
+          {
+            title: "User Management",
+            href: `/${locale}/user-management`,
+          },
+          {
+            title: "User Profile",
+            href: `/${locale}/user-profile`,
+          },
+          {
+            title: "User Settings",
+            href: `/${locale}/user-settings`,
+          },
+        ],
       },
       {
         title: "Settings",
@@ -154,32 +172,32 @@ export function Sidebar({ className }: { className?: string }) {
       },
     ],
     [locale]
-  )
+  );
 
   const selectedSidebarColor =
     sidebarColors.find((color) => color.name === sidebarColor) ||
-    sidebarColors[0]
+    sidebarColors[0];
 
   const toggleSubmenu = (title: string) => {
     if (sidebarCollapsed) {
-      setSidebarCollapsed(false)
-      setOpenSubmenu(title)
+      setSidebarCollapsed(false);
+      setOpenSubmenu(title);
     } else {
-      setOpenSubmenu(openSubmenu === title ? null : title)
+      setOpenSubmenu(openSubmenu === title ? null : title);
     }
-  }
+  };
 
   const isSubmenuActive = (item: NavigationItem) => {
-    if (!item.submenu) return false
-    return item.submenu.some((subItem) => pathname === subItem.href)
-  }
+    if (!item.submenu) return false;
+    return item.submenu.some((subItem) => pathname === subItem.href);
+  };
 
   // When collapsing the sidebar, close any open submenu
   React.useEffect(() => {
     if (sidebarCollapsed) {
-      setOpenSubmenu(null)
+      setOpenSubmenu(null);
     }
-  }, [sidebarCollapsed])
+  }, [sidebarCollapsed]);
 
   return (
     <div
@@ -190,9 +208,9 @@ export function Sidebar({ className }: { className?: string }) {
         selectedSidebarColor.color,
         isVerticalLayout
           ? cn(
-            "transition-all duration-300 ease-in-out",
-            sidebarCollapsed ? "w-[80px]" : "w-[280px]"
-          )
+              "transition-all duration-300 ease-in-out",
+              sidebarCollapsed ? "w-[80px]" : "w-[280px]"
+            )
           : "w-full",
         className
       )}
@@ -201,16 +219,17 @@ export function Sidebar({ className }: { className?: string }) {
         className={cn(
           "flex",
           isVerticalLayout
-            ? "flex-col py-6"
+            ? "flex-col py-4"
             : "h-16 items-center justify-between px-6",
           sidebarCollapsed && isVerticalLayout && "items-center"
         )}
       >
         <div
           className={cn(
-            "flex items-center mb-6",
-            isVerticalLayout &&
-            cn("px-6", sidebarCollapsed ? "justify-center px-0" : "")
+            "flex items-center",
+            isVerticalLayout
+              ? cn("mb-8 px-6", sidebarCollapsed ? "justify-center px-0" : "justify-start")
+              : "h-full"
           )}
         >
           {sidebarCollapsed ? (
@@ -219,12 +238,9 @@ export function Sidebar({ className }: { className?: string }) {
                 <TooltipTrigger asChild>
                   <Link
                     href="/"
-                    className="flex items-center justify-center transition-all duration-200 hover:text-primary"
+                    className="flex items-center justify-center p-2 rounded-xl transition-all duration-200 hover:bg-muted/50"
                   >
-                    <Icon
-                      icon={items[0].icon}
-                      className="h-6 w-6 transition-all duration-200 group-hover:scale-110"
-                    />
+                    <ClientLogo mode="minimal" size="sm" />
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent side="right" sideOffset={10}>
@@ -235,13 +251,9 @@ export function Sidebar({ className }: { className?: string }) {
           ) : (
             <Link
               href="/"
-              className="flex items-center gap-3 transition-all duration-200 hover:text-primary"
+              className="flex items-center gap-4 p-2 rounded-xl transition-all duration-200 hover:bg-muted/50"
             >
-              <Icon
-                icon={items[0].icon}
-                className="h-6 w-6 transition-all duration-200 group-hover:scale-110"
-              />
-              <span className="font-semibold">Tychi Course</span>
+              <ClientLogo mode="full" size="lg" />
             </Link>
           )}
         </div>
@@ -254,8 +266,8 @@ export function Sidebar({ className }: { className?: string }) {
           {items.map((item, index) => {
             const isActive = item.href
               ? pathname === item.href
-              : isSubmenuActive(item)
-            const hasSubmenu = !!item.submenu
+              : isSubmenuActive(item);
+            const hasSubmenu = !!item.submenu;
 
             if (sidebarCollapsed && isVerticalLayout) {
               return (
@@ -270,9 +282,9 @@ export function Sidebar({ className }: { className?: string }) {
                             isActive
                               ? selectedSidebarColor.active
                               : cn(
-                                selectedSidebarColor.muted,
-                                selectedSidebarColor.hover
-                              )
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
                           )}
                         >
                           <Icon
@@ -291,9 +303,9 @@ export function Sidebar({ className }: { className?: string }) {
                             isActive
                               ? selectedSidebarColor.active
                               : cn(
-                                selectedSidebarColor.muted,
-                                selectedSidebarColor.hover
-                              )
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
                           )}
                         >
                           <Icon
@@ -312,7 +324,7 @@ export function Sidebar({ className }: { className?: string }) {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              )
+              );
             }
 
             if (hasSubmenu) {
@@ -327,9 +339,9 @@ export function Sidebar({ className }: { className?: string }) {
                           isActive
                             ? selectedSidebarColor.active
                             : cn(
-                              selectedSidebarColor.muted,
-                              selectedSidebarColor.hover
-                            )
+                                selectedSidebarColor.muted,
+                                selectedSidebarColor.hover
+                              )
                         )}
                       >
                         <div className="flex items-center gap-2">
@@ -339,9 +351,7 @@ export function Sidebar({ className }: { className?: string }) {
                           />
                           <span>{item.title}</span>
                         </div>
-                        <ChevronDown
-                          className="h-4 w-4 transition-transform duration-200"
-                        />
+                        <ChevronDown className="h-4 w-4 transition-transform duration-200" />
                       </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -364,7 +374,7 @@ export function Sidebar({ className }: { className?: string }) {
                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
-                )
+                );
               }
 
               // Vertical layout - use expandable menu
@@ -377,9 +387,9 @@ export function Sidebar({ className }: { className?: string }) {
                       isActive
                         ? selectedSidebarColor.active
                         : cn(
-                          selectedSidebarColor.muted,
-                          selectedSidebarColor.hover
-                        )
+                            selectedSidebarColor.muted,
+                            selectedSidebarColor.hover
+                          )
                     )}
                   >
                     <div className="flex items-center gap-3">
@@ -402,7 +412,7 @@ export function Sidebar({ className }: { className?: string }) {
                   {openSubmenu === item.title && (
                     <div className="ml-4 space-y-1 border-l pl-4">
                       {item.submenu?.map((subItem, subIndex) => {
-                        const isSubActive = pathname === subItem.href
+                        const isSubActive = pathname === subItem.href;
                         return (
                           <Link
                             key={subIndex}
@@ -412,9 +422,9 @@ export function Sidebar({ className }: { className?: string }) {
                               isSubActive
                                 ? selectedSidebarColor.active
                                 : cn(
-                                  selectedSidebarColor.muted,
-                                  selectedSidebarColor.hover
-                                )
+                                    selectedSidebarColor.muted,
+                                    selectedSidebarColor.hover
+                                  )
                             )}
                           >
                             <div className="flex items-center gap-2">
@@ -424,9 +434,9 @@ export function Sidebar({ className }: { className?: string }) {
                                   isSubActive
                                     ? selectedSidebarColor.active
                                     : cn(
-                                      selectedSidebarColor.muted,
-                                      selectedSidebarColor.hover
-                                    )
+                                        selectedSidebarColor.muted,
+                                        selectedSidebarColor.hover
+                                      )
                                 )}
                               />
                               <span>{subItem.title}</span>
@@ -435,12 +445,12 @@ export function Sidebar({ className }: { className?: string }) {
                               <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                             )}
                           </Link>
-                        )
+                        );
                       })}
                     </div>
                   )}
                 </div>
-              )
+              );
             }
 
             return (
@@ -463,7 +473,7 @@ export function Sidebar({ className }: { className?: string }) {
                   <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                 )}
               </Link>
-            )
+            );
           })}
         </nav>
       </div>
@@ -483,5 +493,5 @@ export function Sidebar({ className }: { className?: string }) {
         </Button>
       )}
     </div>
-  )
+  );
 }

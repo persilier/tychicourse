@@ -4,15 +4,14 @@
 import { Logo, type LogoProps } from "@/components/ui/logo"
 import { useAuthBranding } from "@/store/auth-settings-store"
 
-interface ClientLogoProps extends Omit<LogoProps, 'src' | 'darkSrc' | 'name' | 'slogan'> {}
+interface ClientLogoProps extends Omit<LogoProps, 'name' | 'slogan'> {}
 
 export function ClientLogo(props: ClientLogoProps) {
-  const { name, slogan, logo } = useAuthBranding()
+  const { name, slogan } = useAuthBranding()
 
   return (
     <Logo
-      src={logo?.url}
-      darkSrc={logo?.darkUrl}
+      icon="fa6-brands:edge"
       name={name}
       slogan={slogan}
       {...props}

@@ -56,7 +56,36 @@
                 "unitedKingdom": "United Kingdom",
                 "france": "France",
                 "spain": "Spain"
+            },
+            "navigation": {
+                "dashboard": "Dashboard",
+                "authentication": "Authentication",
+                "toastShowcase": "Toast",
+                "modalShowcase": "Modal"
             }
+        },
+        "Customizer": {
+            "title": "Customize",
+            "description": "Personalize your experience",
+            "magicTip": "Changes are saved automatically",
+            "openCustomizer": "Open Customizer",
+            "layoutSettings": "Layout Settings",
+            "resetToDefaults": "Reset to defaults",
+            "layout": "Layout",
+            "verticalLayout": "Vertical Layout",
+            "horizontalLayout": "Horizontal Layout",
+            "theme": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System",
+            "borderRadius": "Border Radius",
+            "square": "Square",
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "full": "Full",
+            "accentColor": "Accent Color",
+            "sidebarTheme": "Sidebar Theme"
         }
     },
     "Auth": {
@@ -92,6 +121,58 @@
             "preview": {
                 "title": "Preview",
                 "description": "See how your authentication pages will look"
+            }
+        }
+    },
+    "Common": {
+        "Modal": {
+            "createTitle": "Create New",
+            "editTitle": "Edit",
+            "deleteTitle": "Delete",
+            "viewTitle": "View Details",
+            "createDescription": "Fill in the information below to create a new item",
+            "editDescription": "Modify the information below to update this item",
+            "deleteDescription": "Are you sure you want to delete this item?",
+            "viewDescription": "View the details of this item"
+        }
+    },
+    "Showcase": {
+        "Modal": {
+            "title": "Modal Component",
+            "description": "A beautiful and versatile modal component with various sizes, header variants, and operation modes.",
+            "sizeVariants": {
+                "title": "Size Variants",
+                "description": "Different size options to fit your content needs",
+                "modalTitle": "{size} Modal Example",
+                "modalContent": "This modal demonstrates the {size} size variant. The content area adjusts automatically to fit the modal size."
+            },
+            "headerVariants": {
+                "title": "Header Variants",
+                "description": "Different header styles for different contexts",
+                "modalTitle": "{variant} Header Example",
+                "modalContent": "This modal demonstrates the {variant} header variant with its unique gradient style."
+            },
+            "operationModes": {
+                "title": "Operation Modes",
+                "description": "Pre-configured modes for common operations",
+                "deleteMessage": "This action cannot be undone. This will permanently delete this item.",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "patternToggle": {
+                "title": "Pattern Toggle",
+                "description": "Toggle the floral pattern overlay in the header",
+                "withPattern": "With Pattern",
+                "withoutPattern": "Without Pattern",
+                "modalTitle": "Pattern Overlay Example",
+                "withPatternContent": "This modal includes the beautiful floral pattern overlay in its header.",
+                "withoutPatternContent": "This modal has a clean header without the pattern overlay."
+            },
+            "form": {
+                "name": "Name",
+                "namePlaceholder": "Enter name",
+                "description": "Description",
+                "descriptionPlaceholder": "Enter description"
             }
         }
     }

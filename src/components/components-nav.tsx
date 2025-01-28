@@ -101,12 +101,52 @@ const sections: NavSection[] = [
     ],
   },
   {
+    title: "Components",
+    items: [
+      {
+        title: "Buttons",
+        href: "/components/buttons",
+        icon: "solar:buttons-bold-duotone",
+      },
+      {
+        title: "Cards",
+        href: "/components/cards",
+        icon: "solar:card-bold-duotone",
+      },
+      {
+        title: "Modals",
+        href: "/modal-showcase",
+        icon: "solar:popup-bold-duotone",
+      },
+      {
+        title: "Toasts",
+        href: "/toast-showcase",
+        icon: "solar:bell-bing-bold-duotone",
+      },
+      {
+        title: "File Upload",
+        href: "/file-upload-showcase",
+        icon: "solar:upload-square-bold-duotone",
+      },
+      {
+        title: "Avatar Upload",
+        href: "/avatar-upload-showcase",
+        icon: "solar:user-circle-bold-duotone",
+      },
+    ],
+  },
+  {
     title: "Pages",
     items: [
       {
         title: "Pages d'Erreur",
         href: "/error-pages",
         icon: AlertTriangle,
+      },
+      {
+        title: "User Management",
+        href: "/user-management",
+        icon: "solar:users-group-rounded-bold-duotone",
       },
     ],
   },

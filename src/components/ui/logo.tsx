@@ -3,10 +3,10 @@
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
 import { cva, type VariantProps } from "class-variance-authority"
-import Image from "next/image"
+import { Icon } from "@iconify/react"
 import Link from "next/link"
 
-const logoVariants = cva("flex items-center gap-2 transition-opacity hover:opacity-80", {
+const logoVariants = cva("flex items-center gap-3 transition-all duration-300", {
     variants: {
         size: {
             sm: "text-sm",
@@ -19,86 +19,84 @@ const logoVariants = cva("flex items-center gap-2 transition-opacity hover:opaci
             default: "",
             link: "hover:underline",
         },
+        mode: {
+            full: "",
+            minimal: "",
+        }
     },
     defaultVariants: {
         size: "md",
         variant: "default",
+        mode: "full",
     },
 })
 
 export interface LogoProps extends VariantProps<typeof logoVariants> {
-    src?: string
-    darkSrc?: string
+    icon?: string
     name?: string
     slogan?: string
     showSlogan?: boolean
     href?: string
     className?: string
+    mode?: "full" | "minimal"
 }
 
 export function Logo({
-    src = "/logo.svg",
-    darkSrc,
+    icon = "fa6-brands:edge",
     name = "Tychi Course",
     slogan = "Votre plateforme d'apprentissage",
     showSlogan = true,
     href = "/",
     size,
     variant,
+    mode = "full",
     className,
 }: LogoProps) {
     const { theme } = useTheme()
-    const logoSrc = theme === "dark" && darkSrc ? darkSrc : src
+    const Component = href ? Link : "div"
+    const iconSize = {
+        sm: "w-8 h-8",
+        md: "w-9 h-9",
+        lg: "w-10 h-10",
+        xl: "w-11 h-11",
+        "2xl": "w-12 h-12",
+    }[size || "md"]
 
-    const WithLink = ({ children }: { children: React.ReactNode }) => {
-        if (href) {
-            return <Link href={href}>{children}</Link>
-        }
-        return <>{children}</>
-    }
+    const iconInnerSize = {
+        sm: "w-5 h-5",
+        md: "w-6 h-6",
+        lg: "w-6 h-6",
+        xl: "w-7 h-7",
+        "2xl": "w-8 h-8",
+    }[size || "md"]
 
     return (
-        <WithLink>
-            <div className={cn(logoVariants({ size, variant }), className)}>
-                {/* Logo */}
-                {logoSrc && (
-                    <div className="relative h-8 w-8 shrink-0">
-                        <Image
-                            src={logoSrc}
-                            alt={name}
-                            fill
-                            className="object-contain"
-                            unoptimized={logoSrc.startsWith('data:')}
-                        />
-                    </div>
-                )}
-
-                {/* Text Content */}
-                <div className="flex flex-col">
-                    <span className={cn(
-                        "font-semibold leading-none tracking-tight",
-                        size === "2xl" && "text-3xl",
-                        size === "xl" && "text-2xl",
-                        size === "lg" && "text-xl",
-                        size === "md" && "text-lg",
-                        size === "sm" && "text-base",
-                    )}>
-                        {name}
-                    </span>
-                    {showSlogan && (
-                        <span className={cn(
-                            "text-muted-foreground font-normal",
-                            size === "2xl" && "text-lg",
-                            size === "xl" && "text-base",
-                            size === "lg" && "text-sm",
-                            size === "md" && "text-xs",
-                            size === "sm" && "text-[0.7rem]",
-                        )}>
-                            {slogan}
-                        </span>
-                    )}
+        <Component
+            {...(href ? { href } : {})}
+            className={cn(logoVariants({ size, variant, mode }), "hover:opacity-80", className)}
+        >
+            <div className="relative flex items-center justify-center">
+                <div className={cn(
+                    "relative rounded-xl bg-gradient-to-br from-sky-500/20 via-blue-500/20 to-indigo-500/20 flex items-center justify-center",
+                    iconSize
+                )}>
+                    <Icon 
+                        icon={icon} 
+                        className={cn(
+                            "text-sky-500 transition-transform duration-300 group-hover:scale-110",
+                            iconInnerSize
+                        )} 
+                    />
                 </div>
             </div>
-        </WithLink>
+            {mode === "full" && (
+                <div className="flex flex-col">
+                    <span className="font-semibold leading-none">{name}</span>
+                    {showSlogan && (
+                        <span className="text-xs text-muted-foreground mt-1">{slogan}</span>
+                    )}
+                </div>
+            )}
+        </Component>
     )
 }
