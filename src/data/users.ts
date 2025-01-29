@@ -7,9 +7,9 @@ export interface User {
   lastName: string;
   email: string;
   password: string; // In a real app, this would be hashed
-  avatar?: string;
-  status: UserStatus;
   role: UserRole;
+  status: UserStatus;
+  avatar?: string;
   createdAt: string;
   lastLogin?: string;
 }
@@ -52,9 +52,9 @@ export const users: User[] = Array.from({ length: 100 }, (_, index) => {
     lastName,
     email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
     password: `hashed_password_${index + 1}`,
-    avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
-    status,
     role,
+    status,
+    avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}${lastName}`,
     createdAt,
     ...(hasLastLogin && {
       lastLogin: randomDate(new Date(createdAt), new Date('2024-01-28')),

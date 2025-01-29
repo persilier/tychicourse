@@ -61,8 +61,40 @@
                 "dashboard": "Dashboard",
                 "authentication": "Authentication",
                 "toastShowcase": "Toast",
-                "modalShowcase": "Modal"
-            }
+                "modalShowcase": "Modal",
+                "user-management": "User Management"
+            },
+            "breadcrumb": {
+                "user-management": {
+                    "title": "User Management",
+                    "breadcrumb": "User Management"
+                }
+            },
+            "notifications": {
+                "title": "Notifications",
+                "noNotifications": "No notifications",
+                "markAllAsRead": "Mark all as read",
+                "viewAll": "View all"
+            },
+            "userMenu": {
+                "profile": "Profile",
+                "settings": "Settings",
+                "help": "Help & Support",
+                "logout": "Log out"
+            },
+            "search": {
+                "placeholder": "Search anything...",
+                "noResults": "No results found.",
+                "categories": {
+                    "general": "General",
+                    "courses": "Courses",
+                    "lessons": "Lessons",
+                    "users": "Users"
+                }
+            },
+            "newLesson": "New Lesson",
+            "newAssignment": "New Assignment",
+            "newQuiz": "New Quiz"
         },
         "Customizer": {
             "title": "Customize",
@@ -134,6 +166,22 @@
             "editDescription": "Modify the information below to update this item",
             "deleteDescription": "Are you sure you want to delete this item?",
             "viewDescription": "View the details of this item"
+        },
+        "Dialog": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        },
+        "Toast": {
+            "notification": "Notification",
+            "success": "Success",
+            "warning": "Warning",
+            "info": "Information",
+            "error": "Error",
+            "actions": {
+                "undo": "Undo",
+                "retry": "Retry",
+                "close": "Close"
+            }
         }
     },
     "Showcase": {
@@ -175,5 +223,190 @@
                 "descriptionPlaceholder": "Enter description"
             }
         }
+    },
+    "UserManagement": {
+        "title": "User Management",
+        "description": "Manage users, roles and permissions",
+        "addUser": "Add User",
+        "search": "Search users...",
+        "selectedUsers": {
+          "single": "1 user selected",
+          "multiple": "{count} users selected"
+        },
+        "filters": {
+            "search": "Search users...",
+            "role": {
+                "label": "Role",
+                "all": "All roles",
+                "admin": "Admin",
+                "instructor": "Instructor",
+                "student": "Student"
+            },
+            "status": {
+                "label": "Status",
+                "all": "All statuses",
+                "active": "Active",
+                "inactive": "Inactive",
+                "pending": "Pending"
+            }
+        },
+        "actions": {
+            "create": "Create User",
+            "edit": "Edit User",
+            "delete": "Delete User",
+            "export": {
+                "label": "Export",
+                "pdf": "Export to PDF",
+                "excel": "Export to Excel"
+            }
+        },
+        "table": {
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "status": "Status",
+            "createdAt": "Created At",
+            "lastLogin": "Last Login",
+            "actions": "Actions",
+            "never": "Never",
+            "selectAll": "Select all users",
+            "selectUser": "Select {name}"
+        },
+        "form": {
+            "firstName": "First Name",
+            "firstNamePlaceholder": "Enter first name",
+            "lastName": "Last Name",
+            "lastNamePlaceholder": "Enter last name",
+            "email": "Email",
+            "emailPlaceholder": "Enter email address",
+            "role": "Role",
+            "rolePlaceholder": "Select a role",
+            "status": "Status",
+            "statusPlaceholder": "Select a status",
+            "password": "Password",
+            "confirmPassword": "Confirm Password"
+        },
+        "validation": {
+            "required": "This field is required",
+            "email": "Invalid email address",
+            "passwordMatch": "Passwords must match",
+            "minLength": "Must be at least {{count}} characters"
+        },
+        "deleteConfirm": {
+            "title": "Delete User",
+            "description": "Are you sure you want to delete this user? This action cannot be undone.",
+            "confirm": "Delete",
+            "cancel": "Cancel"
+        },
+        "notifications": {
+            "created": "User created successfully",
+            "updated": "User updated successfully",
+            "deleted": "User deleted successfully"
+        },
+        "userNotFound": "User not found",
+        "back": "Back",
+        "activityLog": "Activity Log",
+        "activityLogDescription": "Recent user activities and actions",
+        "sessions": "Sessions",
+        "sessionsDescription": "Active and recent user sessions across devices",
+        "action": "Action",
+        "details": "Details",
+        "ip": "IP Address",
+        "timestamp": "Timestamp",
+        "device": "Device",
+        "browser": "Browser",
+        "location": "Location",
+        "lastActive": "Last Active",
+        "status": "Status",
+        "terminateSession": "Terminate Session",
+        "activities": {
+          "login": "Login",
+          "logout": "Logout",
+          "course_access": "Course Access",
+          "profile_update": "Profile Update",
+          "password_change": "Password Change"
+        },
+        "sessionStatus": {
+          "active": "Active",
+          "expired": "Expired"
+        },
+        "roles": {
+            "admin": "Admin",
+            "instructor": "Instructor",
+            "student": "Student"
+        },
+        "statuses": {
+            "active": "Active",
+            "inactive": "Inactive",
+            "pending": "Pending"
+        },
+        "export": {
+            "button": "Export",
+            "pdf": "Export as PDF",
+            "excel": "Export as Excel",
+            "success": {
+                "pdf": {
+                    "title": "PDF Generated",
+                    "description": "Your users report has been downloaded successfully."
+                },
+                "excel": {
+                    "title": "Excel Generated",
+                    "description": "Your users report has been downloaded successfully."
+                }
+            }
+        },
+        "delete": {
+            "single": {
+                "title": "Delete User",
+                "description": "Are you sure you want to delete this user? This action cannot be undone.",
+                "success": "User deleted successfully."
+            },
+            "multiple": {
+                "title": "Delete Users",
+                "description": "Are you sure you want to delete {count} users? This action cannot be undone.",
+                "success": "{count} users deleted successfully."
+            }
+        },
+        "pagination": {
+            "showing": "Showing {start} to {end} of {total} users",
+            "previous": "Previous",
+            "next": "Next"
+        },
+        "modal": {
+            "createTitle": "Create New User",
+            "createDescription": "Fill in the information below to create a new user.",
+            "editTitle": "Edit User",
+            "editDescription": "Update the user's information below."
+        },
+        "toast": {
+            "createSuccess": {
+                "title": "User Created",
+                "description": "The user has been created successfully."
+            },
+            "createError": {
+                "title": "Creation Failed",
+                "description": "There was an error creating the user. Please try again."
+            },
+            "updateSuccess": {
+                "title": "User Updated",
+                "description": "The user has been updated successfully."
+            },
+            "updateError": {
+                "title": "Update Failed",
+                "description": "There was an error updating the user. Please try again."
+            },
+            "deleteSuccess": {
+                "title": "User Deleted",
+                "description": "The user has been deleted successfully."
+            },
+            "deleteError": {
+                "title": "Delete Failed",
+                "description": "There was an error deleting the user. Please try again."
+            }
+        },
+        "uploadAvatar": "Upload Avatar",
+        "changeAvatar": "Change Avatar",
+        "removeAvatar": "Remove Avatar",
+        "avatarUploadError": "Error uploading avatar"
     }
 }

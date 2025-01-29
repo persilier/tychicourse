@@ -61,7 +61,33 @@
                 "dashboard": "Tableau de bord",
                 "authentication": "Authentification",
                 "toastShowcase": "Toast",
-                "modalShowcase": "Exemple de modal"
+                "modalShowcase": "Exemple de modal",
+                "user-management": "Gestion des utilisateurs"
+            },
+            "newLesson": "Nouvelle leçon",
+            "newAssignment": "Nouveau devoir",
+            "newQuiz": "Nouveau quiz",
+            "notifications": {
+                "title": "Notifications",
+                "noNotifications": "Aucune notification",
+                "markAllAsRead": "Tout marquer comme lu",
+                "viewAll": "Voir tout"
+            },
+            "userMenu": {
+                "profile": "Profil",
+                "settings": "Paramètres",
+                "help": "Aide & Support",
+                "logout": "Se déconnecter"
+            },
+            "search": {
+                "placeholder": "Rechercher...",
+                "noResults": "Aucun résultat trouvé.",
+                "categories": {
+                    "general": "Général",
+                    "courses": "Cours",
+                    "lessons": "Leçons",
+                    "users": "Utilisateurs"
+                }
             }
         },
         "Customizer": {
@@ -134,6 +160,22 @@
             "editDescription": "Modifiez les informations ci-dessous pour mettre à jour cet élément",
             "deleteDescription": "Êtes-vous sûr de vouloir supprimer cet élément ?",
             "viewDescription": "Voir les détails de cet élément"
+        },
+        "Dialog": {
+            "confirm": "Confirmer",
+            "cancel": "Annuler"
+        },
+        "Toast": {
+            "notification": "Notification",
+            "success": "Succès",
+            "warning": "Attention",
+            "info": "Information",
+            "error": "Erreur",
+            "actions": {
+                "undo": "Annuler",
+                "retry": "Réessayer",
+                "close": "Fermer"
+            }
         }
     },
     "Showcase": {
@@ -174,6 +216,109 @@
                 "description": "Description",
                 "descriptionPlaceholder": "Entrez la description"
             }
+        }
+    },
+    "UserManagement": {
+        "title": "Gestion des utilisateurs",
+        "description": "Gérer les utilisateurs, les rôles et les permissions",
+        "filters": {
+            "search": "Rechercher des utilisateurs...",
+            "role": {
+                "label": "Rôle",
+                "all": "Tous les rôles",
+                "admin": "Administrateur",
+                "instructor": "Instructeur",
+                "student": "Étudiant"
+            },
+            "status": {
+                "label": "Statut",
+                "all": "Tous les statuts",
+                "active": "Actif",
+                "inactive": "Inactif",
+                "pending": "En attente"
+            }
+        },
+        "actions": {
+            "create": "Créer un utilisateur",
+            "edit": "Modifier l'utilisateur",
+            "delete": "Supprimer l'utilisateur",
+            "export": {
+                "label": "Exporter",
+                "pdf": "Exporter en PDF",
+                "excel": "Exporter en Excel"
+            }
+        },
+        "table": {
+            "name": "Nom",
+            "email": "Email",
+            "role": "Rôle",
+            "status": "Statut",
+            "createdAt": "Créé le",
+            "lastLogin": "Dernière connexion",
+            "never": "Jamais"
+        },
+        "form": {
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "Email",
+            "role": "Rôle",
+            "status": "Statut",
+            "password": "Mot de passe",
+            "confirmPassword": "Confirmer le mot de passe"
+        },
+        "validation": {
+            "required": "Ce champ est requis",
+            "email": "Adresse email invalide",
+            "passwordMatch": "Les mots de passe doivent correspondre",
+            "minLength": "Doit contenir au moins {{count}} caractères"
+        },
+        "deleteConfirm": {
+            "title": "Supprimer l'utilisateur",
+            "description": "Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action ne peut pas être annulée.",
+            "confirm": "Supprimer",
+            "cancel": "Annuler"
+        },
+        "notifications": {
+            "created": "Utilisateur créé avec succès",
+            "updated": "Utilisateur mis à jour avec succès",
+            "deleted": "Utilisateur supprimé avec succès"
+        },
+        "userNotFound": "Utilisateur non trouvé",
+        "back": "Retour",
+        "activityLog": "Journal d'activité",
+        "activityLogDescription": "Activités et actions récentes de l'utilisateur",
+        "sessions": "Sessions",
+        "sessionsDescription": "Sessions actives et récentes sur tous les appareils",
+        "action": "Action",
+        "details": "Détails",
+        "ip": "Adresse IP",
+        "timestamp": "Horodatage",
+        "device": "Appareil",
+        "browser": "Navigateur",
+        "location": "Localisation",
+        "lastActive": "Dernière activité",
+        "status": "Statut",
+        "terminateSession": "Terminer la session",
+        "activities": {
+            "login": "Connexion",
+            "logout": "Déconnexion",
+            "course_access": "Accès au cours",
+            "profile_update": "Mise à jour du profil",
+            "password_change": "Changement de mot de passe"
+        },
+        "sessionStatus": {
+            "active": "Active",
+            "expired": "Expirée"
+        },
+        "roles": {
+            "admin": "Administrateur",
+            "instructor": "Instructeur",
+            "student": "Étudiant"
+        },
+        "statuses": {
+            "active": "Actif",
+            "inactive": "Inactif",
+            "pending": "En attente"
         }
     }
 }
