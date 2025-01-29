@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { useTranslations, useLocale, useIntl } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Icon } from "@iconify/react";
 import { 
   Card, 
@@ -55,7 +55,6 @@ export default function UserManagementPage() {
 
   const t = useTranslations("UserManagement");
   const locale = useLocale();
-  const intl = useIntl();
   const toast = useCustomToast();
 
   // Filter users based on search query and filters
