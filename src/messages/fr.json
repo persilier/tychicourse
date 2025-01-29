@@ -11,8 +11,10 @@
             "logout": "Déconnexion",
             "darkMode": "Mode sombre",
             "lightMode": "Mode clair",
-            "search": "Rechercher...",
-            "searchPlaceholder": "Tapez une commande ou recherchez...",
+            "search": {
+                "placeholder": "Tapez une commande ou recherchez...",
+                "label": "Rechercher..."
+            },
             "noResults": "Aucun résultat trouvé.",
             "quickNav": "Navigation rapide",
             "actions": "Actions rapides",

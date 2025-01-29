@@ -11,8 +11,10 @@
             "logout": "Log out",
             "darkMode": "Dark mode",
             "lightMode": "Light mode",
-            "search": "Search...",
-            "searchPlaceholder": "Type a command or search...",
+            "search": {
+                "placeholder": "Type a command or search...",
+                "label": "Search..."
+            },
             "noResults": "No results found.",
             "quickNav": "Quick Navigation",
             "actions": "Quick Actions",

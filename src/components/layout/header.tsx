@@ -162,7 +162,7 @@ export function Header() {
               onClick={() => setCommandOpen(true)}
             >
               <Icon icon="solar:magnifer-bold-duotone" className="mr-2 h-5 w-5" />
-              {t("search")}
+              {t("search.label")}
               <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                 <span className="text-xs">⌘</span>K
               </kbd>
