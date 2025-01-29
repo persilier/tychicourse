@@ -9,6 +9,7 @@ import {
     XCircle,
     Bell
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface ToastOptions {
     title?: string
@@ -19,12 +20,13 @@ interface ToastOptions {
 
 export function useCustomToast() {
     const { toast } = useToast()
+    const t = useTranslations("Common.Toast")
 
     const iconClasses = "h-5 w-5 animate-in zoom-in duration-200"
     const iconContainerClasses = "mr-2 flex-shrink-0 [--scale:0.8] group-hover:[--scale:1] transition-transform duration-200 transform"
 
     // Rich color variants (avec fond coloré)
-    const primary = ({ title = "Notification", description, action, duration }: ToastOptions) => {
+    const primary = ({ title = t("notification"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -41,7 +43,7 @@ export function useCustomToast() {
         })
     }
 
-    const success = ({ title = "Succès", description, action, duration }: ToastOptions) => {
+    const success = ({ title = t("success"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -58,7 +60,7 @@ export function useCustomToast() {
         })
     }
 
-    const warning = ({ title = "Attention", description, action, duration }: ToastOptions) => {
+    const warning = ({ title = t("warning"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -75,7 +77,7 @@ export function useCustomToast() {
         })
     }
 
-    const info = ({ title = "Information", description, action, duration }: ToastOptions) => {
+    const info = ({ title = t("info"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -92,7 +94,7 @@ export function useCustomToast() {
         })
     }
 
-    const error = ({ title = "Erreur", description, action, duration }: ToastOptions) => {
+    const error = ({ title = t("error"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -110,7 +112,7 @@ export function useCustomToast() {
     }
 
     // Soft variants (fond légèrement coloré)
-    const softPrimary = ({ title = "Notification", description, action, duration }: ToastOptions) => {
+    const softPrimary = ({ title = t("notification"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -127,7 +129,7 @@ export function useCustomToast() {
         })
     }
 
-    const softSuccess = ({ title = "Succès", description, action, duration }: ToastOptions) => {
+    const softSuccess = ({ title = t("success"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -144,7 +146,7 @@ export function useCustomToast() {
         })
     }
 
-    const softWarning = ({ title = "Attention", description, action, duration }: ToastOptions) => {
+    const softWarning = ({ title = t("warning"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -161,7 +163,7 @@ export function useCustomToast() {
         })
     }
 
-    const softInfo = ({ title = "Information", description, action, duration }: ToastOptions) => {
+    const softInfo = ({ title = t("info"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -178,7 +180,7 @@ export function useCustomToast() {
         })
     }
 
-    const softError = ({ title = "Erreur", description, action, duration }: ToastOptions) => {
+    const softError = ({ title = t("error"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -196,7 +198,7 @@ export function useCustomToast() {
     }
 
     // Light variants (fond blanc)
-    const lightPrimary = ({ title = "Notification", description, action, duration }: ToastOptions) => {
+    const lightPrimary = ({ title = t("notification"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -213,7 +215,7 @@ export function useCustomToast() {
         })
     }
 
-    const lightSuccess = ({ title = "Succès", description, action, duration }: ToastOptions) => {
+    const lightSuccess = ({ title = t("success"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -230,7 +232,7 @@ export function useCustomToast() {
         })
     }
 
-    const lightWarning = ({ title = "Attention", description, action, duration }: ToastOptions) => {
+    const lightWarning = ({ title = t("warning"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -247,7 +249,7 @@ export function useCustomToast() {
         })
     }
 
-    const lightInfo = ({ title = "Information", description, action, duration }: ToastOptions) => {
+    const lightInfo = ({ title = t("info"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">
@@ -264,7 +266,7 @@ export function useCustomToast() {
         })
     }
 
-    const lightError = ({ title = "Erreur", description, action, duration }: ToastOptions) => {
+    const lightError = ({ title = t("error"), description, action, duration }: ToastOptions) => {
         toast({
             title: (
                 <div className="flex items-center">

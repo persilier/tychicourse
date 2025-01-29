@@ -224,202 +224,47 @@ export function Sidebar({ className }: { className?: string }) {
           sidebarCollapsed && isVerticalLayout && "items-center"
         )}
       >
-        <div
-          className={cn(
-            "flex items-center",
-            isVerticalLayout
-              ? cn("mb-8 px-6", sidebarCollapsed ? "justify-center px-0" : "justify-start")
-              : "h-full"
-          )}
-        >
-          {sidebarCollapsed ? (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href="/"
-                    className="flex items-center justify-center p-2 rounded-xl transition-all duration-200 hover:bg-muted/50"
-                  >
-                    <ClientLogo mode="minimal" size="sm" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent side="right" sideOffset={10}>
-                  Tychi Course
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          ) : (
-            <Link
-              href="/"
-              className="flex items-center gap-4 p-2 rounded-xl transition-all duration-200 hover:bg-muted/50"
-            >
-              <ClientLogo mode="full" size="lg" />
+        <div className="flex flex-col space-y-2">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-4 p-2 rounded-xl transition-all duration-200 hover:bg-accent">
+              <ClientLogo mode="full" size="lg" asChild />
             </Link>
-          )}
-        </div>
-        <nav
-          className={cn(
-            "flex gap-1.5",
-            isVerticalLayout ? "flex-col px-4" : "items-center"
-          )}
-        >
-          {items.map((item, index) => {
-            const isActive = item.href
-              ? pathname === item.href
-              : isSubmenuActive(item);
-            const hasSubmenu = !!item.submenu;
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            >
+              {sidebarCollapsed ? (
+                <ChevronRight className="h-4 w-4" />
+              ) : (
+                <ChevronLeft className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
+          <nav
+            className={cn(
+              "flex gap-1.5",
+              isVerticalLayout ? "flex-col px-4" : "items-center"
+            )}
+          >
+            {items.map((item, index) => {
+              const isActive = item.href
+                ? pathname === item.href
+                : isSubmenuActive(item);
+              const hasSubmenu = !!item.submenu;
 
-            if (sidebarCollapsed && isVerticalLayout) {
-              return (
-                <TooltipProvider key={index}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      {hasSubmenu ? (
-                        <button
-                          onClick={() => toggleSubmenu(item.title)}
-                          className={cn(
-                            "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
-                            isActive
-                              ? selectedSidebarColor.active
-                              : cn(
-                                  selectedSidebarColor.muted,
-                                  selectedSidebarColor.hover
-                                )
-                          )}
-                        >
-                          <Icon
-                            icon={item.icon}
-                            className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
-                          />
-                          {isActive && (
-                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
-                          )}
-                        </button>
-                      ) : (
-                        <Link
-                          href={item.href!}
-                          className={cn(
-                            "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
-                            isActive
-                              ? selectedSidebarColor.active
-                              : cn(
-                                  selectedSidebarColor.muted,
-                                  selectedSidebarColor.hover
-                                )
-                          )}
-                        >
-                          <Icon
-                            icon={item.icon}
-                            className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
-                          />
-                          {isActive && (
-                            <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
-                          )}
-                        </Link>
-                      )}
-                    </TooltipTrigger>
-                    <TooltipContent side="right" sideOffset={10}>
-                      {item.title}
-                      {hasSubmenu && " (Click to expand)"}
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              );
-            }
-
-            if (hasSubmenu) {
-              if (!isVerticalLayout) {
-                // Horizontal layout - use dropdown menu
+              if (sidebarCollapsed && isVerticalLayout) {
                 return (
-                  <DropdownMenu key={index}>
-                    <DropdownMenuTrigger asChild>
-                      <button
-                        className={cn(
-                          "group relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all duration-200",
-                          isActive
-                            ? selectedSidebarColor.active
-                            : cn(
-                                selectedSidebarColor.muted,
-                                selectedSidebarColor.hover
-                              )
-                        )}
-                      >
-                        <div className="flex items-center gap-2">
-                          <Icon
-                            icon={item.icon}
-                            className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
-                          />
-                          <span>{item.title}</span>
-                        </div>
-                        <ChevronDown className="h-4 w-4 transition-transform duration-200" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="start"
-                      className="w-56"
-                      sideOffset={8}
-                    >
-                      {item.submenu?.map((subItem, subIndex) => (
-                        <DropdownMenuItem key={subIndex} asChild>
-                          <Link
-                            href={subItem.href}
+                  <TooltipProvider key={index}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        {hasSubmenu ? (
+                          <button
+                            onClick={() => toggleSubmenu(item.title)}
                             className={cn(
-                              "flex w-full items-center px-2 py-1.5",
-                              pathname === subItem.href && "text-primary"
-                            )}
-                          >
-                            {subItem.title}
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                );
-              }
-
-              // Vertical layout - use expandable menu
-              return (
-                <div key={index} className="w-full space-y-1">
-                  <button
-                    onClick={() => toggleSubmenu(item.title)}
-                    className={cn(
-                      "group relative flex w-full items-center justify-between gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
-                      isActive
-                        ? selectedSidebarColor.active
-                        : cn(
-                            selectedSidebarColor.muted,
-                            selectedSidebarColor.hover
-                          )
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon
-                        icon={item.icon}
-                        className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
-                      />
-                      <span>{item.title}</span>
-                    </div>
-                    <ChevronDown
-                      className={cn(
-                        "h-4 w-4 transition-transform duration-200",
-                        openSubmenu === item.title && "rotate-180"
-                      )}
-                    />
-                    {isActive && (
-                      <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
-                    )}
-                  </button>
-                  {openSubmenu === item.title && (
-                    <div className="ml-4 space-y-1 border-l pl-4">
-                      {item.submenu?.map((subItem, subIndex) => {
-                        const isSubActive = pathname === subItem.href;
-                        return (
-                          <Link
-                            key={subIndex}
-                            href={subItem.href}
-                            className={cn(
-                              "group relative flex w-full items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
-                              isSubActive
+                              "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
+                              isActive
                                 ? selectedSidebarColor.active
                                 : cn(
                                     selectedSidebarColor.muted,
@@ -427,71 +272,197 @@ export function Sidebar({ className }: { className?: string }) {
                                   )
                             )}
                           >
-                            <div className="flex items-center gap-2">
-                              <span
-                                className={cn(
-                                  "h-1.5 w-1.5 rounded-full transition-colors duration-200",
-                                  isSubActive
-                                    ? selectedSidebarColor.active
-                                    : cn(
-                                        selectedSidebarColor.muted,
-                                        selectedSidebarColor.hover
-                                      )
-                                )}
-                              />
-                              <span>{subItem.title}</span>
-                            </div>
-                            {isSubActive && (
-                              <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
+                            <Icon
+                              icon={item.icon}
+                              className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                            />
+                            {isActive && (
+                              <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
+                            )}
+                          </button>
+                        ) : (
+                          <Link
+                            href={item.href!}
+                            className={cn(
+                              "group relative flex h-10 w-10 items-center justify-center rounded-lg transition-all duration-200",
+                              isActive
+                                ? selectedSidebarColor.active
+                                : cn(
+                                    selectedSidebarColor.muted,
+                                    selectedSidebarColor.hover
+                                  )
+                            )}
+                          >
+                            <Icon
+                              icon={item.icon}
+                              className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                            />
+                            {isActive && (
+                              <span className="absolute right-0 top-1/2 h-3 w-1 -translate-y-1/2 rounded-l-full bg-current" />
                             )}
                           </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            }
+                        )}
+                      </TooltipTrigger>
+                      <TooltipContent side="right" sideOffset={10}>
+                        {item.title}
+                        {hasSubmenu && " (Click to expand)"}
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                );
+              }
 
-            return (
-              <Link
-                key={index}
-                href={item.href!}
-                className={cn(
-                  "group relative flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
-                  isActive
-                    ? selectedSidebarColor.active
-                    : cn(selectedSidebarColor.muted, selectedSidebarColor.hover)
-                )}
-              >
-                <Icon
-                  icon={item.icon}
-                  className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
-                />
-                <span>{item.title}</span>
-                {isActive && (
-                  <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+              if (hasSubmenu) {
+                if (!isVerticalLayout) {
+                  // Horizontal layout - use dropdown menu
+                  return (
+                    <DropdownMenu key={index}>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          className={cn(
+                            "group relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all duration-200",
+                            isActive
+                              ? selectedSidebarColor.active
+                              : cn(
+                                  selectedSidebarColor.muted,
+                                  selectedSidebarColor.hover
+                                )
+                          )}
+                        >
+                          <div className="flex items-center gap-2">
+                            <Icon
+                              icon={item.icon}
+                              className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                            />
+                            <span>{item.title}</span>
+                          </div>
+                          <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        align="start"
+                        className="w-56"
+                        sideOffset={8}
+                      >
+                        {item.submenu?.map((subItem, subIndex) => (
+                          <DropdownMenuItem key={subIndex} asChild>
+                            <Link
+                              href={subItem.href}
+                              className={cn(
+                                "flex w-full items-center px-2 py-1.5",
+                                pathname === subItem.href && "text-primary"
+                              )}
+                            >
+                              {subItem.title}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  );
+                }
+
+                // Vertical layout - use expandable menu
+                return (
+                  <div key={index} className="w-full space-y-1">
+                    <button
+                      onClick={() => toggleSubmenu(item.title)}
+                      className={cn(
+                        "group relative flex w-full items-center justify-between gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
+                        isActive
+                          ? selectedSidebarColor.active
+                          : cn(
+                              selectedSidebarColor.muted,
+                              selectedSidebarColor.hover
+                            )
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon
+                          icon={item.icon}
+                          className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                        />
+                        <span>{item.title}</span>
+                      </div>
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 transition-transform duration-200",
+                          openSubmenu === item.title && "rotate-180"
+                        )}
+                      />
+                      {isActive && (
+                        <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
+                      )}
+                    </button>
+                    {openSubmenu === item.title && (
+                      <div className="ml-4 space-y-1 border-l pl-4">
+                        {item.submenu?.map((subItem, subIndex) => {
+                          const isSubActive = pathname === subItem.href;
+                          return (
+                            <Link
+                              key={subIndex}
+                              href={subItem.href}
+                              className={cn(
+                                "group relative flex w-full items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
+                                isSubActive
+                                  ? selectedSidebarColor.active
+                                  : cn(
+                                      selectedSidebarColor.muted,
+                                      selectedSidebarColor.hover
+                                    )
+                              )}
+                            >
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={cn(
+                                    "h-1.5 w-1.5 rounded-full transition-colors duration-200",
+                                    isSubActive
+                                      ? selectedSidebarColor.active
+                                      : cn(
+                                          selectedSidebarColor.muted,
+                                          selectedSidebarColor.hover
+                                        )
+                                  )}
+                                />
+                                <span>{subItem.title}</span>
+                              </div>
+                              {isSubActive && (
+                                <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
+                              )}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={index}
+                  href={item.href!}
+                  className={cn(
+                    "group relative flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all duration-200",
+                    isActive
+                      ? selectedSidebarColor.active
+                      : cn(selectedSidebarColor.muted, selectedSidebarColor.hover)
+                  )}
+                >
+                  <Icon
+                    icon={item.icon}
+                    className="h-5 w-5 transition-all duration-200 group-hover:scale-110"
+                  />
+                  <span>{item.title}</span>
+                  {isActive && (
+                    <span className="absolute right-0 top-1/2 h-6 w-1 -translate-y-1/2 rounded-l-full bg-current" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
       </div>
-      {isVerticalLayout && (
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute -right-3 top-6 h-6 w-6 rounded-full bg-background border shadow-sm hover:bg-accent/50"
-          onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-        >
-          {sidebarCollapsed ? (
-            <ChevronRight className="h-4 w-4" />
-          ) : (
-            <ChevronLeft className="h-4 w-4" />
-          )}
-          <span className="sr-only">Toggle Sidebar</span>
-        </Button>
-      )}
     </div>
   );
 }

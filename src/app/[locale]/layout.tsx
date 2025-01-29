@@ -1,16 +1,19 @@
 import { Providers } from "@/components/providers"
 import { unstable_setRequestLocale } from "next-intl/server"
 import { getMessages } from "@/config/i18n"
-import { NextIntlClientProvider } from "next-intl"
+import { NextIntlClientProvider, createTranslator } from "next-intl"
 
 export async function generateMetadata({
   params: { locale }
 }: {
   params: { locale: string }
 }) {
+  const messages = await getMessages(locale)
+  const t = await createTranslator({ locale, messages })
+
   return {
-    title: "Tychi Course",
-    description: "Your learning platform",
+    title: t("Metadata.title"),
+    description: t("Metadata.description"),
   }
 }
 
@@ -36,5 +39,5 @@ export default async function LocaleLayout({
 }
 
 export function generateStaticParams() {
-  return [{ locale: "fr" }, { locale: "en" }, { locale: "es" }]
+  return [{ locale: "en" }, { locale: "fr" }]
 }

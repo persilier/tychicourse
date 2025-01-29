@@ -18,6 +18,7 @@
             "actions": "Quick Actions",
             "dashboard": "Dashboard",
             "courses": "Courses",
+            "user-management": "User Management",
             "latestUpdates": "Latest updates",
             "markAllAsRead": "Mark all as read",
             "today": "Today",
@@ -304,11 +305,14 @@
             "deleted": "User deleted successfully"
         },
         "userNotFound": "User not found",
-        "back": "Back",
+        "back": "Back to Users",
+        "filter": "Filter",
+        "terminateAllSessions": "Terminate All",
+        "terminateSession": "Terminate Session",
         "activityLog": "Activity Log",
         "activityLogDescription": "Recent user activities and actions",
-        "sessions": "Sessions",
-        "sessionsDescription": "Active and recent user sessions across devices",
+        "sessions": "Active Sessions",
+        "sessionsDescription": "Currently active sessions across devices",
         "action": "Action",
         "details": "Details",
         "ip": "IP Address",
@@ -318,17 +322,16 @@
         "location": "Location",
         "lastActive": "Last Active",
         "status": "Status",
-        "terminateSession": "Terminate Session",
         "activities": {
-          "login": "Login",
-          "logout": "Logout",
-          "course_access": "Course Access",
-          "profile_update": "Profile Update",
-          "password_change": "Password Change"
+            "login": "Logged In",
+            "logout": "Logged Out",
+            "profile_update": "Updated Profile",
+            "password_change": "Changed Password",
+            "course_access": "Accessed Course"
         },
         "sessionStatus": {
-          "active": "Active",
-          "expired": "Expired"
+            "active": "Active",
+            "expired": "Expired"
         },
         "roles": {
             "admin": "Admin",
@@ -407,6 +410,16 @@
         "uploadAvatar": "Upload Avatar",
         "changeAvatar": "Change Avatar",
         "removeAvatar": "Remove Avatar",
-        "avatarUploadError": "Error uploading avatar"
+        "avatarUploadError": "Error uploading avatar",
+        "timeRange": "Time Range",
+        "sortBy": "Sort By"
+    },
+    "Template": {
+        "title": "Page Title",
+        "description": "Page description goes here",
+        "content": {
+            "title": "Content Title",
+            "description": "Content description goes here"
+        }
     }
 }

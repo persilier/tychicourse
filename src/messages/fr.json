@@ -320,5 +320,13 @@
             "inactive": "Inactif",
             "pending": "En attente"
         }
+    },
+    "Template": {
+        "title": "Titre de la Page",
+        "description": "Description de la page",
+        "content": {
+            "title": "Titre du Contenu",
+            "description": "Description du contenu"
+        }
     }
 }

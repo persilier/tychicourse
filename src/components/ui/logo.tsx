@@ -39,6 +39,7 @@ export interface LogoProps extends VariantProps<typeof logoVariants> {
     href?: string
     className?: string
     mode?: "full" | "minimal"
+    asChild?: boolean 
 }
 
 export function Logo({
@@ -51,9 +52,10 @@ export function Logo({
     variant,
     mode = "full",
     className,
+    asChild = false, 
 }: LogoProps) {
     const { theme } = useTheme()
-    const Component = href ? Link : "div"
+    const Component = href && !asChild ? Link : "div"
     const iconSize = {
         sm: "w-8 h-8",
         md: "w-9 h-9",
@@ -72,7 +74,7 @@ export function Logo({
 
     return (
         <Component
-            {...(href ? { href } : {})}
+            {...(href && !asChild ? { href } : {})}
             className={cn(logoVariants({ size, variant, mode }), "hover:opacity-80", className)}
         >
             <div className="relative flex items-center justify-center">

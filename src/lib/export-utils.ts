@@ -1,6 +1,26 @@
 import { User } from "@/data/users";
 import * as XLSX from "xlsx";
 import { format } from "date-fns";
+import { pdf } from "@react-pdf/renderer";
+import { UsersPDF } from "@/components/pdf/users-pdf";
+
+export const generateUsersPDF = async (users: User[]) => {
+  try {
+    const timestamp = format(new Date(), "MMMM d, yyyy 'at' h:mm a");
+    const blob = await pdf(UsersPDF({ users, timestamp })).toBlob();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `users-report-${format(new Date(), "yyyy-MM-dd")}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    throw error;
+  }
+};
 
 export function exportToExcel(users: User[]) {
   const worksheet = XLSX.utils.json_to_sheet(
@@ -19,7 +39,8 @@ export function exportToExcel(users: User[]) {
 
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
-  XLSX.writeFile(workbook, "users.xlsx");
+
+  XLSX.writeFile(workbook, `users-report-${format(new Date(), "yyyy-MM-dd")}.xlsx`);
 }
 
 export function printUsers(users: User[]) {

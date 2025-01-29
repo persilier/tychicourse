@@ -81,6 +81,7 @@ export function Header() {
   const navigation = [
     { name: t("dashboard"), href: "/dashboard", icon: "solar:home-2-bold-duotone" },
     { name: t("courses"), href: "/courses", icon: "solar:book-bold-duotone" },
+    { name: t("user-management"), href: "/user-management", icon: "solar:users-group-rounded-bold-duotone" },
   ]
 
   const getBreadcrumbItems = () => {
@@ -99,12 +100,21 @@ export function Header() {
     segments.forEach((segment) => {
       if (segment !== locale) { // Skip locale segment
         currentPath += `/${segment}`
+        let icon;
+        switch (segment) {
+          case "courses":
+            icon = <Icon icon="solar:book-bold-duotone" className="h-5 w-5 text-primary" />;
+            break;
+          case "user-management":
+            icon = <Icon icon="solar:users-group-rounded-bold-duotone" className="h-5 w-5 text-primary" />;
+            break;
+          default:
+            icon = undefined;
+        }
         items.push({
           label: t(segment),
           href: currentPath,
-          icon: segment === "courses" 
-            ? <Icon icon="solar:book-bold-duotone" className="h-5 w-5 text-primary" />
-            : undefined
+          icon
         })
       }
     })

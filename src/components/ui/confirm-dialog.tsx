@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./dialog";
+import { useTranslations } from "next-intl";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -58,13 +59,14 @@ export function ConfirmDialog({
   description,
   variant = "danger",
   icon,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
+  confirmText,
+  cancelText,
   onConfirm,
   onCancel,
   loading = false,
   children,
 }: ConfirmDialogProps) {
+  const t = useTranslations("Common.Dialog");
   const variantConfig = variants[variant];
 
   const handleConfirm = () => {
@@ -100,16 +102,14 @@ export function ConfirmDialog({
           <Button
             variant="outline"
             onClick={handleCancel}
-            disabled={loading}
-            className="w-full sm:w-auto"
+            className="mt-2 sm:mt-0"
           >
-            {cancelText}
+            {cancelText || t("cancel")}
           </Button>
           <Button
             variant={variantConfig.confirmVariant}
             onClick={handleConfirm}
             disabled={loading}
-            className="w-full sm:w-auto"
           >
             {loading && (
               <Icon
@@ -117,7 +117,7 @@ export function ConfirmDialog({
                 className="mr-2 h-4 w-4 animate-spin"
               />
             )}
-            {confirmText}
+            {confirmText || t("confirm")}
           </Button>
         </DialogFooter>
       </DialogContent>
